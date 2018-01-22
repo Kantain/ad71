@@ -16,15 +16,15 @@ class Message{
 	}
 
 	function getPresident(){
-		return $this->login;
+		return $this->president;
 	}
 
 	function getContenu(){
-		return $this->password;
+		return $this->contenu;
 	}
 
 	function getDate(){
-		return $this->club;
+		return $this->date;
 	}
 }
 ?>

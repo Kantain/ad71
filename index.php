@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use pw\Services\SessionStorage;
 use pw\Controllers\UserController;
 use pw\Controllers\MessageController;
+use pw\Controllers\AdherentController;
 
 $app = new Silex\Application();
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -73,7 +74,18 @@ $app->get('/messages', function() use ($app){
 		return $app->redirect($url);
 });
 
+$app->get('/liste', function() use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$ac = new AdherentController();
+		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherent($app) ]);
+	}
+	return $app->redirect($url);
+});
+
 $app->post('/envoi_message', 'pw\\Controllers\\MessageController::envoi');
+
+$app->get('/majListe', 'pw\\Controllers\\AdherentController::miseAjour');
 
 $app['debug'] = true;
 $app->run();

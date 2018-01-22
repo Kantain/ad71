@@ -4,7 +4,7 @@ namespace pw\Models;
 
 class AdherentAdministratif
 {
-	protected $id;
+	protected $no_adherent;
 	protected $nom;
 	protected $prenom;
 	protected $sexe;
@@ -22,8 +22,8 @@ class AdherentAdministratif
 	protected $newsletter;
 	protected $photo;
 
-	public function __construct($_id, $_nom, $_prenom, $_sexe, $_date_n, $_lieu_n, $_nationalite, $_no_secu_sociale, $_adresse, $_code_postal, $_ville, $_tel_f, $_tel_m_1, $_tel_m_2, $_email, $_newsletter, $_photo){
-		$this->id=$_id;
+	public function __construct($_no_adherent, $_nom, $_prenom, $_sexe, $_date_n, $_lieu_n, $_nationalite, $_no_secu_sociale, $_adresse, $_code_postal, $_ville, $_tel_f, $_tel_m_1, $_tel_m_2, $_email, $_newsletter, $_photo){
+		$this->no_adherent=$_no_adherent;
 		$this->nom=$_nom;
 		$this->prenom=$_prenom;
 		$this->sexe=$_sexe;

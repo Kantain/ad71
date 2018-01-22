@@ -7,13 +7,6 @@
 	<header>
 		AD71
 	</header>
-	{#<nav>
-		<ul>
-			<li><a href="{{app.request.basepath}}/">Accueil</a></li>
-			<li><a href="{{app.request.basepath}}/contact">Contact</a></li>
-			<li><a href="{{app.request.basepath}}/articles">Ecrire un article</a></li>
-		</ul>
-	</nav>#}
 	<main>
 		{% if session.isConnectedAdmin == false %}
 			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
@@ -24,14 +17,15 @@
 		{% else %}
 			<p>messagerie admin</p>
 			<a href="{{app.request.basepath}}/">Accueil</a>
-			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 			<table>
-				<th>Président</th><th>Message</th><th>Date</th>
-			{% for message in messages %}
-				<tr><td>{{message.getPresident}}</td><td>{{message.getContenu}}</td><td>{{message.getDate}}</td></tr>
+				<th>N° adhérent</th><th>Nom</th><th>Prénom</th>
+			{% for adherent in adherents %}
+				<tr><td>{{adherent.no_adherent}}</td><td>{{adherent.nom}}</td><td>{{adherent.prenom}}</td></tr>
 			{% endfor %}
 			</table>
+			<a href="{{app.request.basepath}}/majListe">Remplir</a>
 		{% endif %}
 	</main>
 </body>

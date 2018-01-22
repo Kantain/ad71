@@ -36,7 +36,15 @@ class MessageController{
         $em = $app['em'];
         $url = $app['url_generator']->generate('home');
 
+        $repository = $em->getRepository('pw\\Models\\Message');
+        $result = $repository->findBy(array(), array('id' => 'DESC'));
+        $retour = array();
 
+        foreach ($result as $key => $value) {
+            array_push($retour, $value);
+        }
+
+        return $retour;
     }
 }
 
