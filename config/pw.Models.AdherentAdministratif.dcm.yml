@@ -1,0 +1,95 @@
+# pw.Models.AdherentAdministratif.dcm.yml
+
+pw\Models\AdherentAdministratif:
+  type: entity
+  table: adherent_administratif
+
+  id:
+    no_adherent:
+      type: integer
+      generator:
+        strategy: auto
+
+  fields:
+    nom:
+      type: string
+      column: nom
+      nullable: false
+    
+    prenom:
+      type: string
+      column: prenom
+      nullable: false
+    
+    sexe:
+      type: enum
+      length: 1
+      values: ['M', 'F']
+      column: sexe
+   
+    date_n:
+      type: string
+      column:  date_n
+      nullable: false
+   
+    lieu_n:
+      type: string
+      column: lieu_n
+      nullable: false
+    
+    nationalite:
+      type: string
+      column: nationalite
+      nullable: false
+    
+    no_secu_sociale:
+      type: integer
+      column: no_secu_sociale
+      nullable: false
+    
+    adresse:
+      type: string
+      column: adresse
+      nullable: false
+    
+    code_postal:
+      type: integer
+      column: code_postal
+      nullable: false
+    
+    ville:
+      type: string
+      column: ville
+      nullable: false
+    
+    tel_f:
+      type: integer
+      column: tel_f
+      nullable: false
+    
+    tel_m_1:
+      type: integer
+      column: tel_m_1
+      nullable: false
+    
+    tel_m_2:
+      type: integer
+      column: tel_m_2
+      nullable: true
+    
+    email:
+      type: string
+      column: email
+      nullable: false
+    
+    newsletter:
+      type: integer
+      column: newsletter
+      nullable: false
+    
+    photo:
+      type: string
+      column: photo
+      nullable: false
+
+

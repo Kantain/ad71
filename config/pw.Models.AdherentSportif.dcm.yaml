@@ -1,0 +1,85 @@
+# pw.Models.AdherentSportif.dcm.yml
+
+pw\Models\AdherentSportif:
+  
+  type: entity
+  table: adherent_sportif
+
+  oneToMany:
+    administratif:
+      targetEntity: adherent_administratif
+      mappedby: sportif
+
+  manyToOne:
+    sportif:
+      targetEntity: adherent_sportif
+      inversedBy: administratif
+      joinColumn:
+        name: no_adherent
+        referencedColumnName: id
+
+  id:
+    no_licence:
+      type: integer
+
+  fields:
+    membre_ad_71:
+      type: integer
+      column: membre_ad_71
+      nullable: false
+      options:
+        default: 0
+
+    dojo:
+      type: string
+      column: dojo
+      nullable: false
+
+    certificat_med:
+      type: string
+      column: certificat_med
+      nullable: false
+
+    date_certificat:
+      type: string
+      column: date_certificat
+      nullable: false
+
+    attestation_sante:
+      type: string
+      column: attestation_sante
+      nullable: false
+
+    autorisation_parent:
+      type: string
+      column: autorisation_parent
+      nullable: true
+      options:
+        default: null
+
+    autorisation_prelevement:
+      type: string
+      column: autorisation_prelevement
+      nullable: false
+
+    location_kimono:
+      type: integer
+      column: location_kimono
+      nullable: false
+      options:
+        default: 0
+
+    no_passeport:
+      type: integer
+      column: no_passeport
+      nullable: false
+
+    categorie_age:
+      type: integer
+      column: categorie_age
+      nullable: false
+
+    categorie_poids:
+      type: integer
+      column: categorie_poids
+      nullable: false
