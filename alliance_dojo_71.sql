@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 22 jan. 2018 à 09:02
+-- Généré le :  lun. 22 jan. 2018 à 14:35
 -- Version du serveur :  10.1.26-MariaDB
 -- Version de PHP :  7.1.8
 
@@ -131,36 +131,39 @@ CREATE TABLE `grade` (
 --
 
 CREATE TABLE `message` (
-  `no_president` tinyint(1) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
+  `president` varchar(20) COLLATE utf8_bin NOT NULL,
   `date_envoi` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `contenu` text COLLATE utf8_bin NOT NULL,
   `lu` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table des messages envoyés par les présidents au super admin';
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `president`
+-- Déchargement des données de la table `message`
 --
 
-CREATE TABLE `president` (
-  `no_adherent` bigint(20) UNSIGNED NOT NULL,
-  `no_president` tinyint(4) NOT NULL,
-  `dojo` varchar(255) COLLATE utf8_bin NOT NULL,
-  `login` varchar(20) COLLATE utf8_bin NOT NULL,
-  `mot_de_passe` varchar(20) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+INSERT INTO `message` (`id`, `president`, `date_envoi`, `contenu`, `lu`) VALUES
+(1, 'p1', '2018-01-22 14:27:37', 'test', 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `super_administrateur`
+-- Structure de la table `utilisateur`
 --
 
-CREATE TABLE `super_administrateur` (
+CREATE TABLE `utilisateur` (
   `login` varchar(20) COLLATE utf8_bin NOT NULL,
-  `mot_de_passe` varchar(20) COLLATE utf8_bin NOT NULL
+  `mot_de_passe` text COLLATE utf8_bin NOT NULL,
+  `club` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`login`, `mot_de_passe`, `club`) VALUES
+('administrateur', '81dc9bdb52d04dc20036dbd8313ed055', 'aucun'),
+('p1', '81dc9bdb52d04dc20036dbd8313ed055', '1');
 
 --
 -- Index pour les tables déchargées
@@ -192,16 +195,15 @@ ALTER TABLE `grade`
   ADD KEY `e_no_adherent` (`no_adherent`);
 
 --
--- Index pour la table `president`
+-- Index pour la table `message`
 --
-ALTER TABLE `president`
-  ADD PRIMARY KEY (`no_president`),
-  ADD KEY `no_adherent` (`no_adherent`);
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `super_administrateur`
+-- Index pour la table `utilisateur`
 --
-ALTER TABLE `super_administrateur`
+ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`login`);
 
 --
@@ -214,10 +216,10 @@ ALTER TABLE `super_administrateur`
 ALTER TABLE `adherent_administratif`
   MODIFY `no_adherent` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `president`
+-- AUTO_INCREMENT pour la table `message`
 --
-ALTER TABLE `president`
-  MODIFY `no_president` tinyint(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables déchargées
 --

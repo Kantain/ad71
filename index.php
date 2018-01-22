@@ -5,8 +5,8 @@ require __DIR__ . '/vendor/autoload.php';
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use pw\Services\SessionStorage;
-use pw\Controllers\ArticleController;
-use pw\Controllers\CommentaireController;
+use pw\Controllers\UserController;
+use pw\Controllers\MessageController;
 
 $app = new Silex\Application();
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -62,15 +62,18 @@ $app->get('/deconnexion', function() use ($app){
 
 $app->get('/messages', function() use ($app){
 	$url = $app['url_generator']->generate('home');
-	if($app['session']->isConnectedAdmin())
-		return $app['twig']->render('messagesAdmin.html', ['session' => $app['session']]);
+	if($app['session']->isConnectedAdmin()){
+		$mc = new MessageController();
+		$messages = $mc->listeMessages($app);
+		return $app['twig']->render('messagesAdmin.html', ['session' => $app['session'], 'messages' => $messages]);
+	}
 	if($app['session']->isConnected())
 		return $app['twig']->render('messages.html', ['session' => $app['session']]);
 	else
 		return $app->redirect($url);
 });
 
-$app->post('/envoi_message');
+$app->post('/envoi_message', 'pw\\Controllers\\MessageController::envoi');
 
 $app['debug'] = true;
 $app->run();

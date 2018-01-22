@@ -14,7 +14,7 @@ class MessageController{
         $this->storage = new SessionStorage();
     }
 
-    public function envoi(Request $app, Application $app){
+    public function envoi(Request $request, Application $app){
         $em = $app['em'];
         $url = $app['url_generator']->generate('home');
 
@@ -26,29 +26,17 @@ class MessageController{
         }
         else{
             $message = new Message($president, $contenu);
-            $em->persist($user);
+            $em->persist($message);
             $em->flush();
             return $app->redirect($url);
         }
     }
 
-    public function inscription(Request $request, Application $app){
-    	$login = $request->get('login', null);
-    	$mdp = $request->get('mdp', null);
-    	$mdp2 = $request->get('mdp2', null);
-    	$em = $app['em'];
+    public function listeMessages(Application $app){
+        $em = $app['em'];
         $url = $app['url_generator']->generate('home');
 
-        if($mdp != $mdp2 || is_null($login) || is_null($mdp) || is_null($mdp2)){
-        	return $app->redirect($url . 'connexion');
-        }
-        else{
-        	$user = new User($login, md5($mdp), false);
-            $em->persist($user);
-            $em->flush();
-            $app['session']->setConnected(true);
-            return $app->redirect($url);
-        }
+
     }
 }
 

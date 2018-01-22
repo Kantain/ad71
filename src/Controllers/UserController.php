@@ -30,7 +30,7 @@ class UserController{
             if($login=='administrateur')
                 $app['session']->setConnectedAdmin(true);
             else{
-                $app['session']->setPresident($login);
+                $app['session']->setPresidentNom($login);
                 $app['session']->setConnected(true);
             }
 
