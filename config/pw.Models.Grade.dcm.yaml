@@ -1,0 +1,123 @@
+# pw.Models.Grade.dcm.yml
+
+pw\Models\Grade:
+
+	type: entity
+  table: grade
+
+  oneToMany:
+    fonctions:
+      targetEntity: fonctions_judo
+      mappedby: grades
+
+  manyToOne:
+    grades:
+      targetEntity: grade
+      inversedBy: fonctions_judo
+      joinColumn:
+        name: no_adherent
+        referencedColumnName: id
+
+  fields:
+    B:
+      type: string
+      column: B
+      nullable: false
+
+    B_J:
+      type: string
+      column: B_J
+      nullable: false
+
+    J:
+      type: string
+      column: J
+      nullable: false
+
+    J_O:
+      type: string
+      column: J_O
+      nullable: false
+
+    O:
+      type: string
+      column: O
+      nullable: false
+
+    O_V:
+      type: string
+      column: J_O
+      nullable: false
+
+    V:
+      type: string
+      column: V
+      nullable: false
+
+    V_Bl:
+      type: string
+      column: V_Bl
+      nullable: false
+
+    Bl:
+      type: string
+      column: Bl
+      nullable: false
+
+    M:
+      type: string
+      column: M
+      nullable: false
+
+    N_1:
+      type: string
+      column: N_1
+      nullable: false
+
+    N_2:
+      type: string
+      column: N_2
+      nullable: false
+
+    N_3:
+      type: string
+      column: N_3
+      nullable: false
+
+    N_4:
+      type: string
+      column: N_4
+      nullable: false
+
+    N_5:
+      type: string
+      column: N_5
+      nullable: false
+
+    N_6:
+      type: string
+      column: N_6
+      nullable: false
+
+    N_7:
+      type: string
+      column: N_7
+      nullable: false
+
+    N_8:
+      type: string
+      column: N_8
+      nullable: false
+
+    N_9:
+      type: string
+      column: N_9
+      nullable: false
+
+    N_10:
+      type: string
+      column: N_10
+      nullable: false
+
+
+
