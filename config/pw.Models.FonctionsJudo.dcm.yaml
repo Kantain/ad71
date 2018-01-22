@@ -11,7 +11,7 @@ pw\Models\FonctionsJudo:
       mappedby: fonctions
 
   manyToOne:
-    sportif:
+    fonctions:
       targetEntity: fonctions_judo
       inversedBy: sportif
       joinColumn:
