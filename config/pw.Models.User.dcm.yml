@@ -1,0 +1,22 @@
+#pw.Models.User.dcm.yml
+
+pw\Models\User:
+  type: entity
+  table: utilisateur
+
+  id:
+    login:
+      type: string
+      lenght: 20
+
+
+  fields:
+    password:
+      type: string
+      lenght: 200
+      column: mot_de_passe
+      nullable: false
+    club:
+      type: string
+      column: club
+      nullable: false

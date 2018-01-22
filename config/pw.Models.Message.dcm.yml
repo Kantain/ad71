@@ -1,0 +1,32 @@
+#pw.Models.Message.dcm.yml
+
+pw\Models\Message:
+  type: entity
+  table: message
+
+  id:
+    id:
+      type: integer
+      lenght: 11
+      generator:
+        strategy: auto
+
+
+  fields:
+    president:
+      type: string
+      lenght: 20
+      column: president
+      nullable: false
+    date:
+      type: string
+      column: date_envoi
+      nullable: false
+    contenu:
+      type: string
+      column: contenu
+      nullable: false
+    lu:
+      type: boolean
+      column: lu
+      nullable: false
