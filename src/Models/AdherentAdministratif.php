@@ -45,5 +45,41 @@ class AdherentAdministratif
 	public function getNoAdherent(){
 		return $this->no_adherent;
 	}
+
+	public function getNom(){
+		return $this->nom;
+	}
+
+	public function getPrenom(){
+		return $this->prenom;
+	}
+
+	public function getSexe(){
+		return $this->sexe;
+	}
+
+	public function getDateN(){
+		return $this->date_n;
+	}
+
+	public function getAdresse(){
+		return $this->adresse;
+	}
+
+	public function getCodePostal(){
+		return $this->code_postal;
+	}
+
+	public function getVille(){
+		return $this->ville;
+	}
+
+	public function getTelM1(){
+		return $this->tel_m_1;
+	}
+
+	public function getEmail(){
+		return $this->email;
+	}
 }
 ?>
