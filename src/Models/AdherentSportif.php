@@ -32,8 +32,59 @@ class AdherentSportif
 		$this->location_kimono=$_location_kimono;
 		$this->no_passeport=$_no_passeport;
 		$this->categorie_age=$_categorie_age;
-		$this->categorie_poids=$_categorie_poids;
-		
+		$this->categorie_poids=$_categorie_poids;	
+	}
+
+	public function getNoLicence(){
+		return $this->no_licence;
+	}
+
+	public function getNoAdherent(){
+		return $this->no_adherent;
+	}
+
+	public function getMembreAd71(){
+		return $this->membre_ad71;
+	}
+
+	public function getDojo(){
+		return $this->dojo;
+	}
+
+	public function getCertificatMed(){
+		return $this->certificat_med;
+	}
+
+	public function getDateCertificat(){
+		return $this->date_certificat;
+	}
+
+	public function getAttestationSante(){
+		return $this->attestation_sante;
+	}
+
+	public function getAutorisationParent(){
+		return $this->autorisation_parent;
+	}
+
+	public function getAutorisationPrelevement(){
+		return $this->autorisation_prelevement;
+	}
+
+	public function getLocationKimono(){
+		return $this->location_kimono;
+	}
+
+	public function getNoPasseport(){
+		return $this->no_passeport;
+	}
+
+	public function getCategorieAge(){
+		return $this->categorie_age;
+	}
+
+	public function getCategoriePoids(){
+		return $this->categorie_poids;
 	}
 }
 ?>
