@@ -54,7 +54,12 @@ class AdherentController{
         $url = $app['url_generator']->generate('home');
 
         $repository = $em->getRepository('pw\\Models\\AdherentAdministratif');
-        $retour = $repository->find($id);
+        $administratif = $repository->find($id);
+        $repository = $em->getRepository('pw\\Models\\AdherentSportif');
+        $sportif = $repository->findBy(array('no_adherent' => $id));
+
+        $retour[0] = $administratif;
+        $retour[1] = $sportif;
 
         return $retour;
     }
@@ -77,55 +82,22 @@ class AdherentController{
         while(isset($retour[$i+1])){
             $infos = $retour[$i];
 
-            $date = explode('/', $infos[7]);
-            $temp = $date[0];
-            $temp2 = $date[1];
-            $date[0] = $temp2;
-            $date[1] = $temp;
-            $naissance = implode('/', $date);
-
-            $age = $this->age($naissance);
-
-            switch ($age) {
-                case $age = 6:
-                    $cat = "Poussinet";
-                    break;
-                case $age<=8:
-                    $cat = "Mini-Poussin";
-                    break;
-                case $age<=10:
-                    $cat = "Poussin";
-                    break;
-                case $age<=12:
-                    $cat = "Benjamin";
-                    break;
-                case $age<=14:
-                    $cat = "Minime";
-                    break;
-                case $age<=17:
-                    $cat = "Cadet";
-                    break;
-                case $age<=20:
-                    $cat = "Junior";
-                    break;
-                case $age>=21:
-                    $cat = "Senior";
-                    break;
-                default:
-                    $cat = "";
-                    break;
-            }
+            $categorie = $this->categorie($infos[7]);
 
             $adherentA = new AdherentAdministratif('default',$infos[4],$infos[5],$infos[6], $infos[7], 'à définir', 'français', 'à définir', $infos[8] . " " . $infos[9], $infos[10], $infos[11], $infos[12], $infos[14], $infos[13], $infos[16], 'à définir', 'à définir');
 
-            $em->persist($adherentA);
-            $em->flush();
+            
 
             $adherentS = new AdherentSportif($infos[1], $adherentA->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
-
-
-            $em->persist($adherentS);
-            $em->flush();
+            try{
+                $em->persist($adherentA);
+                $em->persist($adherentS);
+                $em->flush();
+            }
+            catch(\Doctrine\DBAL\DBALException $e){
+                if($e->getErrorCode() != $error_code_for_dupes)
+                    throw $e;                    
+            }
 
             $i++;
         }
@@ -139,6 +111,49 @@ class AdherentController{
             return $age - 1;
         }
         return $age;
+    }
+
+    private function categorie($_date){
+        $date = explode('/', $_date);
+        $temp = $date[0];
+        $temp2 = $date[1];
+        $date[0] = $temp2;
+        $date[1] = $temp;
+        $naissance = implode('/', $date);
+
+        $age = $this->age($naissance);
+
+        switch ($age) {
+            case $age = 6:
+            $cat = "Poussinet";
+            break;
+            case $age<=8:
+            $cat = "Mini-Poussin";
+            break;
+            case $age<=10:
+            $cat = "Poussin";
+            break;
+            case $age<=12:
+            $cat = "Benjamin";
+            break;
+            case $age<=14:
+            $cat = "Minime";
+            break;
+            case $age<=17:
+            $cat = "Cadet";
+            break;
+            case $age<=20:
+            $cat = "Junior";
+            break;
+            case $age>=21:
+            $cat = "Senior";
+            break;
+            default:
+            $cat = "";
+            break;
+        }
+
+        return $cat;
     }
 }
 

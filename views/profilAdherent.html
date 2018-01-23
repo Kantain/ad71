@@ -15,10 +15,20 @@
 				<input type="submit" name="btconnexion">
 			</form>
 		{% else %}
+			<p></p>
 			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
-			
+			<table>
+				<tr><td>Nom :</td><td>{{adherent[0].getNom}}</td></tr>
+				<tr><td>Prenom :</td><td>{{adherent[0].getPrenom}}</td></tr>
+				<tr><td>Date de Naissance</td><td>{{adherent[0].getDateN}}</td></tr>
+				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
+				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
+				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
+				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
+				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
+			</table>
 		{% endif %}
 	</main>
 </body>

@@ -20,9 +20,31 @@
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 			<table>
-				<th>N° adhérent</th><th>Nom</th><th>Prénom</th><th>Sexe</th><th>Date de Naissance</th><th>Adresse</th><th>Code Postal</th><th>Ville</th><th>Telephone portable</th><th>email</th>
+				<th>N° adhérent</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Sexe</th>
+				<th>Date de Naissance</th>
+				<th>Adresse</th>
+				<th>Code Postal</th>
+				<th>Ville</th>
+				<th>Telephone portable</th>
+				<th>email</th>
+				<th>Afficher profil</th>
 			{% for adherent in adherents %}
-				<tr><a href="{{app.request.basepath}}/adherent/{{adherent.getNoAdherent}}">voir<td>{{adherent.getNoAdherent}}</td><td>{{adherent.getNom}}</td><td>{{adherent.getPrenom}}</td><td>{{adherent.getSexe}}</td><td>{{adherent.getDateN}}</td><td>{{adherent.getAdresse}}</td><td>{{adherent.getCodePostal}}</td><td>{{adherent.getVille}}</td><td>{{adherent.getTelM1}}</td><td>{{adherent.getEmail}}</td></a></tr>
+				<tr>
+					<td>{{adherent.getNoAdherent}}</td>
+					<td>{{adherent.getNom}}</td>
+					<td>{{adherent.getPrenom}}</td>
+					<td>{{adherent.getSexe}}</td>
+					<td>{{adherent.getDateN}}</td>
+					<td>{{adherent.getAdresse}}</td>
+					<td>{{adherent.getCodePostal}}</td>
+					<td>{{adherent.getVille}}</td>
+					<td>{{adherent.getTelM1}}</td>
+					<td>{{adherent.getEmail}}</td>
+					<td><a href="{{app.request.basepath}}/adherent/{{adherent.getNoAdherent}}">voir</a></td>
+				</tr>
 			{% endfor %}
 			</table>
 			<a href="{{app.request.basepath}}/majListe">Remplir</a>
