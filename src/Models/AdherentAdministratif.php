@@ -62,6 +62,18 @@ class AdherentAdministratif
 		return $this->date_n;
 	}
 
+	public function getLieuN(){
+		return $this->lieu_n;
+	}
+
+	public function getNationalite(){
+		return $this->nationalite;
+	}
+
+	public function getNoSecuSociale(){
+		return $this->no_secu_sociale;
+	}
+
 	public function getAdresse(){
 		return $this->adresse;
 	}
@@ -74,12 +86,27 @@ class AdherentAdministratif
 		return $this->ville;
 	}
 
+	public function getTelF()){
+		return $this->tel_f;
+	}
+
 	public function getTelM1(){
 		return $this->tel_m_1;
 	}
 
+	public function getTelM2(){
+		return $this->tel_m_2;
+	}
 	public function getEmail(){
 		return $this->email;
+	}
+
+	public function getNewsletter(){
+		return $this->newsletter;
+	}
+
+	public function getPhoto(){
+		return $this->photo;
 	}
 }
 ?>
