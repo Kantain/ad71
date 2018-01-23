@@ -8,22 +8,26 @@ class Message{
 	protected $date;
 	protected $lu;
 
-	function __construct($_president, $_contenu){
+	public function __construct($_president, $_contenu){
 		$this->president = $_president;
 		$this->contenu = $_contenu;
 		$this->date = date("Y-m-d H:i:s");
 		$this->lu = false;
 	}
 
-	function getPresident(){
+	public function getId(){
+		return $this->id;
+	}
+
+	public function getPresident(){
 		return $this->president;
 	}
 
-	function getContenu(){
+	public function getContenu(){
 		return $this->contenu;
 	}
 
-	function getDate(){
+	public function getDate(){
 		return $this->date;
 	}
 }

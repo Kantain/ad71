@@ -29,7 +29,7 @@
 			<table>
 				<th>Président</th><th>Message</th><th>Date</th>
 			{% for message in messages %}
-				<tr><td>{{message.getPresident}}</td><td>{{message.getContenu}}</td><td>{{message.getDate}}</td></tr>
+				<tr><td>{{message.getPresident}}</td><td>{{message.getContenu}}</td><td>{{message.getDate}}</td><td><a href="{{app.request.basepath}}/supprimerMessage/{{message.getId}}">X</a></td></tr>
 			{% endfor %}
 			</table>
 		{% endif %}

@@ -87,5 +87,16 @@ $app->post('/envoi_message', 'pw\\Controllers\\MessageController::envoi');
 
 $app->get('/majListe', 'pw\\Controllers\\AdherentController::miseAjour');
 
+$app->get('/supprimerMessage/{id}', 'pw\\Controllers\\MessageController::supprimer');
+
+$app->get('/adherent/{numero}', function($numero) use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$ac = new AdherentController();
+		return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherent' => $ac->getAdherent($numero, $app) ]);
+	}
+	return $app->redirect($url);
+});
+
 $app['debug'] = true;
 $app->run();

@@ -49,6 +49,16 @@ class AdherentController{
         return $retour;
     }
 
+    public function getAdherent($id, Application $app){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('home');
+
+        $repository = $em->getRepository('pw\\Models\\AdherentAdministratif');
+        $retour = $repository->find($id);
+
+        return $retour;
+    }
+
     public function miseAjour(Application $app){
         $em = $app['em'];
         $url = $app['url_generator']->generate('home');

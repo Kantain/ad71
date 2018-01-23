@@ -20,9 +20,9 @@
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 			<table>
-				<th>N° adhérent</th><th>Nom</th><th>Prénom</th>
+				<th>N° adhérent</th><th>Nom</th><th>Prénom</th><th>Sexe</th><th>Date de Naissance</th><th>Adresse</th><th>Code Postal</th><th>Ville</th><th>Telephone portable</th><th>email</th>
 			{% for adherent in adherents %}
-				<tr><td>{{adherent.no_adherent}}</td><td>{{adherent.nom}}</td><td>{{adherent.prenom}}</td></tr>
+				<tr><a href="{{app.request.basepath}}/adherent/{{adherent.getNoAdherent}}">voir<td>{{adherent.getNoAdherent}}</td><td>{{adherent.getNom}}</td><td>{{adherent.getPrenom}}</td><td>{{adherent.getSexe}}</td><td>{{adherent.getDateN}}</td><td>{{adherent.getAdresse}}</td><td>{{adherent.getCodePostal}}</td><td>{{adherent.getVille}}</td><td>{{adherent.getTelM1}}</td><td>{{adherent.getEmail}}</td></a></tr>
 			{% endfor %}
 			</table>
 			<a href="{{app.request.basepath}}/majListe">Remplir</a>

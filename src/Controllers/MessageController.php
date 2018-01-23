@@ -46,6 +46,18 @@ class MessageController{
 
         return $retour;
     }
+
+    public function supprimer($id, Application $app){
+        $em = $app['em'];
+
+        $itemToRemove = $em->find('pw\\Models\\Message',$id);
+        $em->remove($itemToRemove);
+        $em->flush();
+
+        $url = $app['url_generator']->generate('home');
+
+        return $app->redirect($url . 'messages');
+    }
 }
 
 ?>
