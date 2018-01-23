@@ -42,6 +42,8 @@ class AdherentAdministratif
 		$this->photo=$_photo;
 	}
 
-
+	public function getNoAdherent(){
+		return $this->no_adherent;
+	}
 }
 ?>

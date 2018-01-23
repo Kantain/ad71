@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
 use pw\Services\SessionStorage;
 use pw\Models\AdherentAdministratif;
+use pw\Models\AdherentSportif;
+use \DateTime;
 
 class AdherentController{
 	protected $storage;
@@ -37,7 +39,7 @@ class AdherentController{
         $url = $app['url_generator']->generate('home');
 
         $repository = $em->getRepository('pw\\Models\\AdherentAdministratif');
-        $result = $repository->findBy(array(), array('nom' => 'ASC'));
+        $result = $repository->findBy(array(), array('no_adherent' => 'ASC'));
         $retour = array();
 
         foreach ($result as $key => $value) {
@@ -60,17 +62,73 @@ class AdherentController{
             array_push($retour, $ligne);
         }
 
-        var_dump($retour);
+        $i=1;
 
-        $i=0;
-        while(!is_null($retour[$i+1])){
+        while(isset($retour[$i+1])){
             $infos = $retour[$i];
-            $adherent = new AdherentAdministratif();
-            $em->persist($adherent);
+
+            $date = explode('/', $infos[7]);
+            $temp = $date[0];
+            $temp2 = $date[1];
+            $date[0] = $temp2;
+            $date[1] = $temp;
+            $naissance = implode('/', $date);
+
+            $age = $this->age($naissance);
+
+            switch ($age) {
+                case $age = 6:
+                    $cat = "Poussinet";
+                    break;
+                case $age<=8:
+                    $cat = "Mini-Poussin";
+                    break;
+                case $age<=10:
+                    $cat = "Poussin";
+                    break;
+                case $age<=12:
+                    $cat = "Benjamin";
+                    break;
+                case $age<=14:
+                    $cat = "Minime";
+                    break;
+                case $age<=17:
+                    $cat = "Cadet";
+                    break;
+                case $age<=20:
+                    $cat = "Junior";
+                    break;
+                case $age>=21:
+                    $cat = "Senior";
+                    break;
+                default:
+                    $cat = "";
+                    break;
+            }
+
+            $adherentA = new AdherentAdministratif('default',$infos[4],$infos[5],$infos[6], $infos[7], 'à définir', 'français', 'à définir', $infos[8] . " " . $infos[9], $infos[10], $infos[11], $infos[12], $infos[14], $infos[13], $infos[16], 'à définir', 'à définir');
+
+            $em->persist($adherentA);
             $em->flush();
+
+            $adherentS = new AdherentSportif($infos[1], $adherentA->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
+
+
+            $em->persist($adherentS);
+            $em->flush();
+
+            $i++;
         }
 
         return $app->redirect($url . 'liste');
+    }
+
+    private function age($date) {
+        $age = date('Y') - date('Y', strtotime($date));
+        if (date('md') < date('md', strtotime($date))) {
+            return $age - 1;
+        }
+        return $age;
     }
 }
 

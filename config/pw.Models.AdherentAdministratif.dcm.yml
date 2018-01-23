@@ -7,6 +7,7 @@ pw\Models\AdherentAdministratif:
   id:
     no_adherent:
       type: integer
+      primary: true
       generator:
         strategy: auto
 
@@ -22,9 +23,9 @@ pw\Models\AdherentAdministratif:
       nullable: false
     
     sexe:
-      type: enum
-      length: 1
-      values: ['M', 'F']
+      type: string
+      length: 2
+      columnDefinition: ENUM('M','F')
       column: sexe
    
     date_n:

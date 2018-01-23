@@ -5,27 +5,19 @@ pw\Models\AdherentSportif:
   type: entity
   table: adherent_sportif
 
-  oneToMany:
-    administratif:
-      targetEntity: adherent_administratif
-      mappedby: sportif
-
-  manyToOne:
-    sportif:
-      targetEntity: adherent_sportif
-      inversedBy: administratif
-      joinColumn:
-        name: no_adherent
-        referencedColumnName: id
-
   id:
     no_licence:
       type: integer
 
   fields:
-    membre_ad_71:
+    no_adherent:
       type: integer
-      column: membre_ad_71
+      column: no_adherent
+      nullable: false
+
+    membre_ad71:
+      type: integer
+      column: membre_ad71
       nullable: false
       options:
         default: 0
