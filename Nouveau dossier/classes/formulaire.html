@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action = "inscription.php" method="post">
+	<h2>Etat civil</h2>
+	Civilite :
+	<input type="radio" name="civilite" value="Monsieur"/> <label for="Monsieur">Monsieur</label>
+	<input type="radio" name="civilite" value="Madame"/> <label for="Madame">Madame</label>
+	<input type="radio" name="civilite" value="Mademoiselle"/> <label for="Mademoiselle">Mademoiselle</label>
+	<br>
+
+	Nom :
+	<input type="text" name = "nom" placeholder="Votre nom"/>
+	<br>
+
+	Prenom :
+	<input type="text" name = "prenom" placeholder="Votre prenom"/>
+	<br>
+
+	Date de naissance : 
+	<input type="text" name="date de naissance" placeholder="jj/mm/aaaa"/>
+	<br>
+
+	Lieu de naissance :
+	<input type="text" name ="lieu de naissance" placeholder="Votre lieu de naissance"/>
+	<br>
+
+	Nationalite :
+	<input type="text" name="nationalite" value="Francaise"/>
+	<br>
+
+	No securite sociale :
+	<input type="text" name = "secu sociale" placeholder="Votre no securite sociale"/>
+
+	<h2>Adresse</h2>
+	Adresse :
+	<input type="textarea" name="adresse" placeholder="Rue 1"/>
+	<br>
+
+	Code postal :
+	<input type="text" name = "code postal" placeholder="Code postal"/>
+	<br>
+
+	Ville :
+	<input type="text" name ="ville" placeholder="Ville"/>
+
+	<h2>Contact</h2>
+	Telephone :
+	<input type="text" name = "telephone" placeholder="Telephone"/>
+	<br>
+
+	Mobile :
+	<input type="text" name = "mobile" placeholder="Mobile"/>
+	<br>
+
+	Adresse Email :
+	<input type="text" name = "email" placeholder="Adresse email"/>
+	<br>
+
+	<input type="checkbox" name="case" id="case" checked = "checked" /> <label for="case" >J'accepte de recevoir la newsletter (maxi 1 fois par mois)</label>
+	<br>
+
+	<input type="submit" name="Continuer"/>
+
+</form>
+</body>
+</html>
+
+
