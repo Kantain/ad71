@@ -85,9 +85,13 @@ class AdherentController{
             $cat = $this->categorie($infos[7]);
 
             $adherentA = new AdherentAdministratif('default',$infos[4],$infos[5],$infos[6], $infos[7], 'à définir', 'français', 'à définir', $infos[8] . " " . $infos[9], $infos[10], $infos[11], $infos[12], $infos[14], $infos[13], $infos[16], 'à définir', 'à définir');
-            $em->persist($adherentA);            
+            $em->persist($adherentA);
+            $em->flush();
 
-            $adherentS = new AdherentSportif($infos[1], $adherentA->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
+            $repo = $em->getRepository('pw\\Models\\AdherentAdministratif');
+            $adh = $repo->findOneBy(array(), array('no_adherent' => 'DESC'));
+
+            $adherentS = new AdherentSportif($infos[1], $adh->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
             try{
                 $em->persist($adherentS);
                 $em->flush();

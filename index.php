@@ -94,13 +94,15 @@ $app->get('/adherent/{numero}', function($numero) use ($app){
 	if($app['session']->isConnectedAdmin()){
 		$ac = new AdherentController();
 		$temp = $ac->getAdherent($numero, $app);
-		var_dump($numero);
-		var_dump($temp[0]);
-		/*if(!is_null($temp[0]) && !is_null($temp[1])){
-			return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherentAdministratif' => $temp[0] , 'adherentSportif' => $temp[1] ]);
-		}*/
+		if(!is_null($temp[0]) && !is_null($temp[1])){
+			return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherentAdministratif' => $temp[0] , 'adherentSportif' => $temp[1]]);
+		}
 	}
-	//return $app->redirect($url . 'liste');
+	return $app->redirect($url . 'liste');
+});
+
+$app->get('/adherent/{numero}/modifier', function($numero) use ($app){
+	
 });
 
 $app['debug'] = true;
