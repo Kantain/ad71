@@ -1,0 +1,16 @@
+# pw.Models.AdherentSportif_FonctionsJudo.dcm.yml
+
+pw\Models\AdherentSportif_FonctionsJudo:
+  
+  type: entity
+  table: adherent_sportif_fonctions_judo
+
+  fields:
+    no_adherent:
+      type: integer
+
+    id:
+      type: integer
+
+    date_obtention:
+      type: string
