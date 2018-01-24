@@ -172,6 +172,15 @@ class AdherentController{
         $location_kimono = $request->get('location_kimono');
         $no_passeport = $request->get('no_passeport');
         $categorie_poids = $request->get('categorie_poids');
+
+        if(!is_null($no_licence)){
+            $itemToModify = $em->find('pw\\Models\\AdherentSportif', $no_licence);
+
+        }
+    }
+
+    public function ajoutAdherentFormulaire(Request $request, Application $app){
+        
     }
 }
 

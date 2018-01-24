@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AD71</title>
+</head>
+<body>
+	<header>
+		AD71
+	</header>
+	<main>
+		<form action = "{{app.request.basepath}}/formulaire" method="post">
+			<h2>Etat civil</h2>
+			<legend>Civilite :</legend>
+			<input type="radio" name="civilite" value="Monsieur"/> <label for="Monsieur">Monsieur</label>
+			<input type="radio" name="civilite" value="Madame"/> <label for="Madame">Madame</label>
+			<input type="radio" name="civilite" value="Mademoiselle"/> <label for="Mademoiselle">Mademoiselle</label>
+			<br>
+			<legend>Nom :</legend>
+			<input type="text" name = "nom" placeholder="Votre nom" required />
+			<br>
+			<legend>Prenom :</legend>
+			<input type="text" name = "prenom" placeholder="Votre prenom" required>
+			<br>
+			<legend>Date de naissance :</legend>
+			<input type="text" name="date de naissance" placeholder="jj/mm/aaaa" required/>
+			<br>
+			Lieu de naissance :
+			<input type="text" name ="lieu de naissance" placeholder="Votre lieu de naissance" required/>
+			<br>
+			Nationalite :
+			<input type="text" name="nationalite" value="Francaise" required/>
+			<br>
+			No securite sociale :
+			<input type="text" name = "secu sociale" placeholder="Votre no securite sociale" required/>
+			<h2>Adresse</h2>
+			Adresse :
+			<input type="textarea" name="adresse" placeholder="Rue 1" required/>
+			<br>
+			Code postal :
+			<input type="text" name = "code postal" placeholder="Code postal" required/>
+			<br>
+			Ville :
+			<input type="text" name ="ville" placeholder="Ville" required/>
+			<h2>Contact</h2>
+			Telephone :
+			<input type="text" name = "telephone" placeholder="Telephone" required/>
+			<br>
+			Mobile :
+			<input type="text" name = "mobile" placeholder="Mobile" required/>
+			<br>
+			Adresse Email :
+			<input type="text" name = "email" placeholder="Adresse email" required/>
+			<br>
+			<input type="checkbox" name="case" id="case"/> <label for="case" >J'accepte de recevoir la newsletter (maxi 1 fois par mois)</label>
+			<br>
+			<input type="submit" name="Continuer"/>
+		</form>
+	</main>
+</body>
+</html>

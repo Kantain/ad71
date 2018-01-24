@@ -45,6 +45,12 @@ $app->get('/', function() use ($app){
 	return $app['twig']->render('index.html', ['session' => $app['session']]);
 })->bind('home');
 
+$app->get('/formulaire', function() use ($app){
+	return $app['twig']->render('formulaire.html', ['session' => $app['session']]);
+});
+
+$app->post('/formulaire', 'pw\\Controllers\\AdherentController::ajoutAdherent');
+
 $app->get('/connexion', function() use ($app){
 	$url = $app['url_generator']->generate('home');
 
