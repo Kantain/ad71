@@ -39,6 +39,12 @@ class AdherentSportif
 		return $this->no_licence;
 	}
 
+	public function setNoLicence($_no_licence){
+		if (!is_null($_no_licence)) {
+			$this->no_licence = $_no_licence;
+		}
+	}
+
 	public function getNoAdherent(){
 		return $this->no_adherent;
 	}

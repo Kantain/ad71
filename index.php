@@ -97,13 +97,41 @@ $app->get('/adherent/{numero}', function($numero) use ($app){
 		if(!is_null($temp[0]) && !is_null($temp[1])){
 			return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherentAdministratif' => $temp[0] , 'adherentSportif' => $temp[1]]);
 		}
+		return $app->redirect($url . 'liste');
 	}
-	return $app->redirect($url . 'liste');
+	return $app->redirect($url);
 });
 
 $app->get('/adherent/{numero}/modifier', function($numero) use ($app){
-	
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		return $app['twig']->render('AccueilModifier.html', ['session' => $app['session'], 'numero' => $numero]);
+	}
+	return $app->redirect($url);
 });
+
+$app->get('/adherent/{numero}/modifier/administratif', function($numero) use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$ac = new AdherentController();
+		$temp = $ac->getAdherent($numero, $app);
+		return $app['twig']->render('modifierAdministratif.html', ['session' => $app['session'], 'numero' => $numero, 'profil' => $temp[0]]);
+	}
+	return $app->redirect($url);
+});
+
+$app->get('/adherent/{numero}/modifier/sportif', function($numero) use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$ac = new AdherentController();
+		$temp = $ac->getAdherent($numero, $app);
+		$age = $temp[0]->getAge();
+		return $app['twig']->render('modifierSportif.html', ['session' => $app['session'], 'numero' => $numero, 'profil' => $temp[1], 'age' => $age]);
+	}
+	return $app->redirect($url);
+});
+
+$app->post('/adherent/{numero}/modifier/sportif', 'pw\\Controllers\\AdherentController::modifierAdherentSportif');
 
 $app['debug'] = true;
 $app->run();

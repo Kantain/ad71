@@ -157,6 +157,22 @@ class AdherentController{
 
         return $cat;
     }
+
+    public function modifierAdherentSportif(Request $request, Application $app, $numero){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('home');
+
+        $no_licence = $request->get('no_licence');
+        $membre_ad_71 = $request->get('membre_ad_71');
+        $dojo = $request->get('dojo');
+        $certificat_medical = $request->get('certificat_medical');
+        $attestation_sante = $request->get('attestation_sante');
+        $autorisation_parentale = $request->get('autorisation_parentale');
+        $autorisation_prelevement = $request->get('autorisation_prelevement');
+        $location_kimono = $request->get('location_kimono');
+        $no_passeport = $request->get('no_passeport');
+        $categorie_poids = $request->get('categorie_poids');
+    }
 }
 
 ?>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AD71</title>
+</head>
+<body>
+	<header>
+		AD71
+	</header>
+	<main>
+		{% if session.isConnectedAdmin == false %}
+		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
+			<input type="text" name="login" placeholder="login">
+			<input type="password" name="mdp" placeholder="mot de passe">
+			<input type="submit" name="btconnexion">
+		</form>
+		{% else %}
+		<a href="{{app.request.basepath}}/">Accueil</a>
+		<a href="{{app.request.basepath}}/messages">Messagerie</a>
+		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a><br>
+		<h1>Panneau de modification du profil sportif</h1>
+		<form action="{{app.request.basepath}}/adherent/{{numero}}/modifier/sportif" method="post" name="modifSportif">
+			<legend>N° de licence</legend>
+			<input type="text" name="no_licence" value="{{profil.getNoLicence}}">
+			<legend>Membre AD71</legend>
+			<select name="membre_ad_71">
+				{% if profil.getMembreAd71==1 %}
+				<option value="oui" selected="selected">Oui</option>
+				<option value="non">Non</option>
+				{% else %}
+				<option value="oui">Oui</option>
+				<option value="non" selected="selected">Non</option>
+				{% endif %}
+			</select>
+			<legend>Dojo</legend>
+			<input type="text" name="dojo" value="{{profil.getDojo}}">
+			<legend>Certificat médical</legend>
+			<input type="text" name="certificat_medical" value="{{profil.getCertificatMed}}">
+			<legend>Attestation de santé</legend>
+			<input type="text" name="attestation_sante" value="{{profil.getAttestationSante}}">
+			{% if age<18 %}
+			<legend>Autorisation parentale</legend>
+			<input type="text" name="autorisation_parentale" value="{{profil.getAutorisationParentale}}">
+			<legend>Autorisation prélèvement</legend>
+			<input type="text" name="autorisation_prelevement" value="{{profil.getAutorisationPrelevement}}">
+			{% endif %}
+			<legend>Location de Kimono</legend>
+			<input type="text" name="location_kimono" value="{{profil.getLocationKimono}}">
+			<legend>N° Passeport</legend>
+			<input type="text" name="no_passeport" value="{{profil.getNoPasseport}}">
+			<legend>Catégorie (poids)</legend>
+			<input type="text" name="categorie_poids" value="{{profil.getCategoriePoids}}"><br>
+			<input type="submit" name="modifier" value="Modifier">
+		</form>
+		{% endif %}
+	</main>
+</body>
+</html>

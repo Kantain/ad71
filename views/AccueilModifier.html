@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AD71</title>
+</head>
+<body>
+	<header>
+		AD71
+	</header>
+	<main>
+		{% if session.isConnectedAdmin == false %}
+		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
+			<input type="text" name="login" placeholder="login">
+			<input type="password" name="mdp" placeholder="mot de passe">
+			<input type="submit" name="btconnexion">
+		</form>
+		{% else %}
+		<a href="{{app.request.basepath}}/">Accueil</a>
+		<a href="{{app.request.basepath}}/messages">Messagerie</a>
+		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a><br>
+		<a href="{{app.request.basepath}}/adherent/{{numero}}/modifier/administratif">Modifier le profil administratif</a>
+		<a href="{{app.request.basepath}}/adherent/{{numero}}/modifier/sportif">Modifier le profil sportif</a>
+		{% endif %}
+	</main>
+</body>
+</html>

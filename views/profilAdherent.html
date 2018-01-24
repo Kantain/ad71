@@ -33,7 +33,7 @@
 			<tr><td>Tél Mobile 2 :</td><td>{{adherentAdministratif.getTelM2}}</td></tr>
 			<tr><td>email :</td><td>{{adherentAdministratif.getEmail}}</td></tr>
 		</table>
-		<a href="{{app.request.basepath}}/modifierProfilAdministratif/{{adherentAdministratif.getNoAdherent}}">Modifier Profil</a>
+		<a href="{{app.request.basepath}}/adherent/{{adherentAdministratif.getNoAdherent}}/modifier">Modifier Profil</a>
 		<table>
 			<tr><th>Données sportives</th></tr>
 			<tr><td>N° de licence :</td><td>{{adherentSportif.getNoLicence}}</td></tr>
@@ -51,7 +51,7 @@
 			<tr><td>Catégorie (age) :</td><td>{{adherentSportif.getCategorieAge}}</td></tr>
 			<tr><td>Catégorie (poids) :</td><td>{{adherentSportif.getCategoriePoids}}</td></tr>
 		</table>
-		<a href="{{app.request.basepath}}/modifierProfilSportif/{{adherentAdministratif.getNoAdherent}}">Modifier Profil</a>
+		<a href="{{app.request.basepath}}/adherent/{{adherentAdministratif.getNoAdherent}}/modifier">Modifier Profil</a>
 		{% endif %}
 	</main>
 </body>
