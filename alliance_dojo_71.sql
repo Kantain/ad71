@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 24 jan. 2018 à 09:11
--- Version du serveur :  10.1.26-MariaDB
--- Version de PHP :  7.1.8
+-- Généré le :  mer. 24 jan. 2018 à 10:01
+-- Version du serveur :  10.1.29-MariaDB
+-- Version de PHP :  7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -73,56 +73,47 @@ CREATE TABLE `adherent_sportif` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fonctions_judo`
+-- Structure de la table `adherent_sportif_ceinture`
 --
 
-CREATE TABLE `fonctions_judo` (
-  `no_adherent` bigint(20) UNSIGNED NOT NULL,
-  `arbitre_f1` date DEFAULT NULL,
-  `arbitre_f2` date DEFAULT NULL,
-  `arbitre_f3` date DEFAULT NULL,
-  `arbitre_f4` date DEFAULT NULL,
-  `arbitre_f5A` date DEFAULT NULL,
-  `arbitre_f5B` date DEFAULT NULL,
-  `com_sportif_n1` date DEFAULT NULL,
-  `com_sportif_n2` date DEFAULT NULL,
-  `com_sportif_n3` date DEFAULT NULL,
-  `com_sportif_n4` date DEFAULT NULL,
-  `fonction_codep` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `fonction_ligue_regionale` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `fonction_autre` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `recompense` varchar(255) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table des fonctions de chaque adhérent';
+CREATE TABLE `adherent_sportif_ceinture` (
+  `no_adherent` int(11) NOT NULL,
+  `couleur` varchar(20) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `grade`
+-- Structure de la table `adherent_sportif_fonctions_judo`
 --
 
-CREATE TABLE `grade` (
-  `no_adherent` bigint(20) UNSIGNED NOT NULL,
-  `B` date NOT NULL,
-  `B_J` date NOT NULL,
-  `J` date NOT NULL,
-  `J_O` date NOT NULL,
-  `O` date NOT NULL,
-  `O_V` date NOT NULL,
-  `V` date NOT NULL,
-  `V_Bl` date NOT NULL,
-  `Bl` date NOT NULL,
-  `M` date NOT NULL,
-  `N_1` date NOT NULL,
-  `N_2` date NOT NULL,
-  `N_3` date NOT NULL,
-  `N_4` date NOT NULL,
-  `N_5` date NOT NULL,
-  `N_6` date NOT NULL,
-  `N_7` date NOT NULL,
-  `N_8` date NOT NULL,
-  `N_9` date NOT NULL,
-  `N_10` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table des données de grades des adhérents';
+CREATE TABLE `adherent_sportif_fonctions_judo` (
+  `no_adherent` int(11) NOT NULL,
+  `fonction` varchar(255) NOT NULL,
+  `date_obtention` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ceinture`
+--
+
+CREATE TABLE `ceinture` (
+  `couleur` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fonctions_judo`
+--
+
+CREATE TABLE `fonctions_judo` (
+  `id` int(11) NOT NULL,
+  `fonction` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -182,16 +173,16 @@ ALTER TABLE `adherent_sportif`
   ADD PRIMARY KEY (`no_licence`);
 
 --
+-- Index pour la table `ceinture`
+--
+ALTER TABLE `ceinture`
+  ADD PRIMARY KEY (`couleur`);
+
+--
 -- Index pour la table `fonctions_judo`
 --
 ALTER TABLE `fonctions_judo`
-  ADD KEY `e_numero_adherent` (`no_adherent`);
-
---
--- Index pour la table `grade`
---
-ALTER TABLE `grade`
-  ADD KEY `e_no_adherent` (`no_adherent`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `message`
@@ -214,26 +205,18 @@ ALTER TABLE `utilisateur`
 --
 ALTER TABLE `adherent_administratif`
   MODIFY `no_adherent` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT pour la table `fonctions_judo`
+--
+ALTER TABLE `fonctions_judo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `fonctions_judo`
---
-ALTER TABLE `fonctions_judo`
-  ADD CONSTRAINT `e_numero_adherent` FOREIGN KEY (`no_adherent`) REFERENCES `adherent_administratif` (`no_adherent`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `grade`
---
-ALTER TABLE `grade`
-  ADD CONSTRAINT `e_no_adherent` FOREIGN KEY (`no_adherent`) REFERENCES `adherent_administratif` (`no_adherent`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
