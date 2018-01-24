@@ -94,10 +94,13 @@ $app->get('/adherent/{numero}', function($numero) use ($app){
 	if($app['session']->isConnectedAdmin()){
 		$ac = new AdherentController();
 		$temp = $ac->getAdherent($numero, $app);
-		var_dump($temp[1]);
-		return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherentAdministratif' => $temp[0] , 'adherentSportif' => $temp[1] ]);
+		var_dump($numero);
+		var_dump($temp[0]);
+		/*if(!is_null($temp[0]) && !is_null($temp[1])){
+			return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherentAdministratif' => $temp[0] , 'adherentSportif' => $temp[1] ]);
+		}*/
 	}
-	return $app->redirect($url);
+	//return $app->redirect($url . 'liste');
 });
 
 $app['debug'] = true;

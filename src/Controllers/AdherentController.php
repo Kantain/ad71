@@ -82,15 +82,13 @@ class AdherentController{
         while(isset($retour[$i+1])){
             $infos = $retour[$i];
 
-            $categorie = $this->categorie($infos[7]);
+            $cat = $this->categorie($infos[7]);
 
             $adherentA = new AdherentAdministratif('default',$infos[4],$infos[5],$infos[6], $infos[7], 'à définir', 'français', 'à définir', $infos[8] . " " . $infos[9], $infos[10], $infos[11], $infos[12], $infos[14], $infos[13], $infos[16], 'à définir', 'à définir');
-
-            
+            $em->persist($adherentA);            
 
             $adherentS = new AdherentSportif($infos[1], $adherentA->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
             try{
-                $em->persist($adherentA);
                 $em->persist($adherentS);
                 $em->flush();
             }
@@ -125,32 +123,32 @@ class AdherentController{
 
         switch ($age) {
             case $age>=21:
-                $cat = "Senior";
-                break;
+            $cat = "Senior";
+            break;
             case $age<=20:
-                $cat = "Junior";
-                break;
+            $cat = "Junior";
+            break;
             case $age<=17:
-                $cat = "Cadet";
-                break;
+            $cat = "Cadet";
+            break;
             case $age<=14:
-                $cat = "Minime";
-                break;
+            $cat = "Minime";
+            break;
             case $age<=12:
-                $cat = "Benjamin";
-                break;
+            $cat = "Benjamin";
+            break;
             case $age<=10:
-                $cat = "Poussin";
-                break;
+            $cat = "Poussin";
+            break;
             case $age<=8:
-                $cat = "Mini-Poussin";
-                break;
+            $cat = "Mini-Poussin";
+            break;
             case $age = 6:
-                $cat = "Poussinet";
-                break;
+            $cat = "Poussinet";
+            break;
             default:
-                $cat = "";
-                break;
+            $cat = "";
+            break;
         }
 
         return $cat;
