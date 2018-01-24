@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 22 jan. 2018 à 14:35
+-- Généré le :  mer. 24 jan. 2018 à 09:11
 -- Version du serveur :  10.1.26-MariaDB
 -- Version de PHP :  7.1.8
 
@@ -33,7 +33,7 @@ CREATE TABLE `adherent_administratif` (
   `nom` varchar(255) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(255) COLLATE utf8_bin NOT NULL,
   `sexe` enum('M','F') COLLATE utf8_bin NOT NULL,
-  `date_n` date NOT NULL,
+  `date_n` varchar(12) COLLATE utf8_bin NOT NULL,
   `lieu_n` varchar(255) COLLATE utf8_bin NOT NULL,
   `nationalite` varchar(2) COLLATE utf8_bin NOT NULL,
   `no_secu_sociale` bigint(15) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `adherent_administratif` (
 
 CREATE TABLE `adherent_sportif` (
   `no_adherent` bigint(20) UNSIGNED NOT NULL,
-  `no_licence` int(11) NOT NULL,
+  `no_licence` varchar(255) COLLATE utf8_bin NOT NULL,
   `membre_ad71` tinyint(1) NOT NULL DEFAULT '0',
   `dojo` varchar(255) COLLATE utf8_bin NOT NULL,
   `certificat_med` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `adherent_sportif` (
   `autorisation_prelevement` varchar(255) COLLATE utf8_bin NOT NULL,
   `location_kimono` tinyint(1) NOT NULL DEFAULT '0',
   `no_passeport` int(11) NOT NULL,
-  `categorie_age` int(3) NOT NULL,
+  `categorie_age` varchar(255) COLLATE utf8_bin NOT NULL,
   `categorie_poids` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table des données sportives des adhérents';
 
@@ -143,7 +143,7 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`id`, `president`, `date_envoi`, `contenu`, `lu`) VALUES
-(1, 'p1', '2018-01-22 14:27:37', 'test', 0);
+(6, 'p1', '2018-01-24 08:55:11', 'test', 0);
 
 -- --------------------------------------------------------
 
@@ -179,8 +179,7 @@ ALTER TABLE `adherent_administratif`
 -- Index pour la table `adherent_sportif`
 --
 ALTER TABLE `adherent_sportif`
-  ADD PRIMARY KEY (`no_licence`),
-  ADD KEY `e_no_adh` (`no_adherent`);
+  ADD PRIMARY KEY (`no_licence`);
 
 --
 -- Index pour la table `fonctions_judo`
@@ -214,21 +213,15 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `adherent_administratif`
 --
 ALTER TABLE `adherent_administratif`
-  MODIFY `no_adherent` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `no_adherent` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `adherent_sportif`
---
-ALTER TABLE `adherent_sportif`
-  ADD CONSTRAINT `e_no_adh` FOREIGN KEY (`no_adherent`) REFERENCES `adherent_administratif` (`no_adherent`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `fonctions_judo`

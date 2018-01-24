@@ -2,33 +2,57 @@
 <html>
 <head>
 	<title>AD71</title>
-</head>
+</head>l
 <body>
 	<header>
 		AD71
 	</header>
 	<main>
 		{% if session.isConnectedAdmin == false %}
-			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
-				<input type="text" name="login" placeholder="login">
-				<input type="password" name="mdp" placeholder="mot de passe">
-				<input type="submit" name="btconnexion">
-			</form>
+		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
+			<input type="text" name="login" placeholder="login">
+			<input type="password" name="mdp" placeholder="mot de passe">
+			<input type="submit" name="btconnexion">
+		</form>
 		{% else %}
-			<p></p>
-			<a href="{{app.request.basepath}}/">Accueil</a>
-			<a href="{{app.request.basepath}}/messages">Messagerie</a>
-			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
-			<table>
-				<tr><td>Nom :</td><td>{{adherent[0].getNom}}</td></tr>
-				<tr><td>Prenom :</td><td>{{adherent[0].getPrenom}}</td></tr>
-				<tr><td>Date de Naissance</td><td>{{adherent[0].getDateN}}</td></tr>
-				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
-				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
-				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
-				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
-				<tr><td>Nom</td><td>{{adherent[0].getNom}}</td></tr>
-			</table>
+		<p></p>
+		<a href="{{app.request.basepath}}/">Accueil</a>
+		<a href="{{app.request.basepath}}/messages">Messagerie</a>
+		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+		<table>
+			<tr><th>Données administratives</th></tr>
+			<tr><td>N° d'adhérent :</td><td>{{adherentAdministratif.getNoAdherent}}</td></tr>
+			<tr><td>Nom :</td><td>{{adherentAdministratif.getNom}}</td></tr>
+			<tr><td>Prenom :</td><td>{{adherentAdministratif.getPrenom}}</td></tr>
+			<tr><td>Date de Naissance :</td><td>{{adherentAdministratif.getDateN}}</td></tr>
+			<tr><td>Nationalité :</td><td>{{adherentAdministratif.getNationalite}}</td></tr>
+			<tr><td>N° Sécurité Sociale :</td><td>{{adherentAdministratif.getNoSecuSociale}}</td></tr>
+			<tr><td>Adresse :</td><td>{{adherentAdministratif.getAdresse}}</td></tr>
+			<tr><td>Code Postal :</td><td>{{adherentAdministratif.getCodePostal}}</td></tr>
+			<tr><td>Tél Fixe :</td><td>{{adherentAdministratif.getTelF}}</td></tr>
+			<tr><td>Tél Mobile 1 :</td><td>{{adherentAdministratif.getTelM1}}</td></tr>
+			<tr><td>Tél Mobile 2 :</td><td>{{adherentAdministratif.getTelM2}}</td></tr>
+			<tr><td>email :</td><td>{{adherentAdministratif.getEmail}}</td></tr>
+		</table>
+		<a href="{{app.request.basepath}}/modifierProfilAdministratif/{{adherentAdministratif.getNoAdherent}}">Modifier Profil</a>
+		<table>
+			<tr><th>Données sportives</th></tr>
+			<tr><td>N° de licence :</td><td>{{adherentSportif.getNoLicence}}</td></tr>
+			<tr><td>Membre du bureau :</td><td>{% if adherentSportif.getMembreAd71 == 1 %}Oui{% else %}Non{% endif %}</td></tr>
+			<tr><td>Dojo :</td><td>{{adherentSportif.getDojo}}</td></tr>
+			<tr><td>Certificat médical :</td><td>{{adherentSportif.getCertificatMed}}</td></tr>
+			<tr><td>Date du Certificat :</td><td>{{adherentSportif.getDateCertificat}}</td></tr>
+			<tr><td>Attestation de Santé :</td><td>{{adherentSportif.getAttestationSante}}</td></tr>
+			{% if adherentAdministratif.getAge<18 %}
+			<tr><td>Autorisation Parentale :</td><td>{{adherentSportif.getAutorisationParent}}</td></tr>
+			<tr><td>Autorisation prélèvement :</td><td>{{adherentSportif.getAutorisationPrelevement}}</td></tr>
+			{% endif %}
+			<tr><td>Location Kimono :</td><td>{{adherentSportif.getLocationKimono}}</td></tr>
+			<tr><td>N° Passeport :</td><td>{{adherentSportif.getNoPasseport}}</td></tr>
+			<tr><td>Catégorie (age) :</td><td>{{adherentSportif.getCategorieAge}}</td></tr>
+			<tr><td>Catégorie (poids) :</td><td>{{adherentSportif.getCategoriePoids}}</td></tr>
+		</table>
+		<a href="{{app.request.basepath}}/modifierProfilSportif/{{adherentAdministratif.getNoAdherent}}">Modifier Profil</a>
 		{% endif %}
 	</main>
 </body>

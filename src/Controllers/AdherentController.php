@@ -56,7 +56,7 @@ class AdherentController{
         $repository = $em->getRepository('pw\\Models\\AdherentAdministratif');
         $administratif = $repository->find($id);
         $repository = $em->getRepository('pw\\Models\\AdherentSportif');
-        $sportif = $repository->findBy(array('no_adherent' => $id));
+        $sportif = $repository->findOneBy(array('no_adherent' => $id));
 
         $retour[0] = $administratif;
         $retour[1] = $sportif;
@@ -124,33 +124,33 @@ class AdherentController{
         $age = $this->age($naissance);
 
         switch ($age) {
-            case $age = 6:
-            $cat = "Poussinet";
-            break;
-            case $age<=8:
-            $cat = "Mini-Poussin";
-            break;
-            case $age<=10:
-            $cat = "Poussin";
-            break;
-            case $age<=12:
-            $cat = "Benjamin";
-            break;
-            case $age<=14:
-            $cat = "Minime";
-            break;
-            case $age<=17:
-            $cat = "Cadet";
-            break;
-            case $age<=20:
-            $cat = "Junior";
-            break;
             case $age>=21:
-            $cat = "Senior";
-            break;
+                $cat = "Senior";
+                break;
+            case $age<=20:
+                $cat = "Junior";
+                break;
+            case $age<=17:
+                $cat = "Cadet";
+                break;
+            case $age<=14:
+                $cat = "Minime";
+                break;
+            case $age<=12:
+                $cat = "Benjamin";
+                break;
+            case $age<=10:
+                $cat = "Poussin";
+                break;
+            case $age<=8:
+                $cat = "Mini-Poussin";
+                break;
+            case $age = 6:
+                $cat = "Poussinet";
+                break;
             default:
-            $cat = "";
-            break;
+                $cat = "";
+                break;
         }
 
         return $cat;

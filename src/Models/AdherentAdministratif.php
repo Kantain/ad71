@@ -108,5 +108,20 @@ class AdherentAdministratif
 	public function getPhoto(){
 		return $this->photo;
 	}
+
+	public function getAge(){
+		$date = explode('/', $this->date_n);
+        $temp = $date[0];
+        $temp2 = $date[1];
+        $date[0] = $temp2;
+        $date[1] = $temp;
+        $naissance = implode('/', $date);
+
+        $age = date('Y') - date('Y', strtotime($naissance));
+        if (date('md') < date('md', strtotime($naissance))) {
+            return $age - 1;
+        }
+        return $age;
+	}
 }
 ?>

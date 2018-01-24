@@ -93,7 +93,9 @@ $app->get('/adherent/{numero}', function($numero) use ($app){
 	$url = $app['url_generator']->generate('home');
 	if($app['session']->isConnectedAdmin()){
 		$ac = new AdherentController();
-		return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherent' => $ac->getAdherent($numero, $app) ]);
+		$temp = $ac->getAdherent($numero, $app);
+		var_dump($temp[1]);
+		return $app['twig']->render('profilAdherent.html', ['session' => $app['session'], 'adherentAdministratif' => $temp[0] , 'adherentSportif' => $temp[1] ]);
 	}
 	return $app->redirect($url);
 });
