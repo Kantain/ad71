@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>AD71</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
 	<header>
@@ -15,10 +17,59 @@
 			<input type="submit" name="btconnexion">
 		</form>
 		{% else %}
-		<a href="{{app.request.basepath}}/">Accueil</a>
-		<a href="{{app.request.basepath}}/messages">Messagerie</a>
-		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a><br>
-		<h1>Panneau de modification du profil administratif</h1>
+		<h2>Panneau de modification du profil administratif</h2>
+		<div id="menu_horizontal">
+			<a href="{{app.request.basepath}}/">Accueil</a>
+			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+			<a href="javascript:history.back()">Retour</a>
+		</div>
+		<form action="{{app.request.basepath}}/adherent/{{numero}}/modifier/administratif" method="post" name="modifAdministratif">
+			<legend>N° d'adhérent</legend>
+			<input type="text" name="no_adherent" value="{{profil.getNoAdherent}}" disabled="disabled" readonly>
+			<legend>Nom</legend>
+			<input type="text" name="nom" value="{{profil.getNom}}">
+			<legend>Prenom</legend>
+			<input type="text" name="prenom" value="{{profil.getPrenom}}">
+			<legend>Sexe</legend>
+			<input type="radio" name="sexe" value="M" placeholder="M">
+			<label>M</label>
+			<input type="radio" name="sexe" value="F" placeholder="F">
+			<label>F</label>
+			<div>
+				{% set date = profil.getDateN|split('/',3) %}
+				{% set dateJour = date[0] %}
+				{% set dateMois = date[1] %}
+				{% set dateAnnee = date[2] %}
+				<legend>Date de naissance</legend>
+				<input type="text" maxlength="2" size="1" name="dateJour" value="{{dateJour}}"> /
+				<input type="text" maxlength="2" size="1" name="dateMois" value="{{dateMois}}"> /
+				<input type="text" maxlength="4" size="3" name="dateAnnee" value="{{dateAnnee}}">
+			</div>
+			<legend>Lieu de Naissance</legend>
+			<input type="text" name="lieu_n" value="{{profil.getLieuN}}">
+			<legend>Nationalite</legend>
+			<input type="text" name="nationalite" value="{{profil.getNationalite}}">
+			<legend>N° de Sécurité Sociale</legend>
+			<input type="text" name="no_secu_sociale" value="{{profil.getNoSecuSociale}}">
+			<legend>Adresse</legend>
+			<input type="text" name="adresse" value="{{profil.getAdresse}}">
+			<legend>Code Postal</legend>
+			<input type="text" name="code_postal" value="{{profil.getCodePostal}}">
+			<legend>Ville</legend>
+			<input type="text" name="ville" value="{{profil.getVille}}">
+			<legend>Téléphone fixe</legend>
+			<input type="text" name="tel_f" value="{{profil.getTelF}}">
+			<legend>Téléphone Mobile 1</legend>
+			<input type="text" name="tel_m_1" value="{{profil.getTelM1}}">
+			<legend>Téléphone Mobile 2</legend>
+			<input type="text" name="tel_m_2" value="{{profil.getTelM2}}">
+			<legend>e-mail</legend>
+			<input type="email" name="email" value="{{profil.getEmail}}">
+			<br>
+			<input type="submit" name="modifier" value="Modifier">
+		</form>
 		{% endif %}
 	</main>
 </body>

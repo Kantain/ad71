@@ -56,6 +56,64 @@ class UserController{
             return $app->redirect($url);
         }
     }
+
+    public function listePresident(Application $app){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('home');
+
+        $repository = $em->getRepository('pw\\Models\\User');
+
+        $compte = $repository->findAll();
+        $compte = count($compte);
+
+        $result = $repository->findBy(array(),array('login' => 'DESC'), $compte-1);
+
+        $retour = array();
+
+        foreach ($result as $key => $value) {
+            array_push($retour, $value);
+        }
+
+        return $retour;
+    }
+
+    public function getPresident(Application $app, $login){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('home');
+
+        $repository = $em->getRepository('pw\\Models\\User');
+        $retour = $repository->find($login);
+
+        return $retour;
+    }
+
+    public function modifierPresident(Request $request, Application $app, $login){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('home');
+
+        $loginM = $request->request->all()["login"];
+        $club = $request->request->all()["club"];
+
+        if (!is_null($loginM)) {
+            echo "ok";
+            $itemToModify = $em->find('pw\\Models\\User', $login);
+            echo $itemToModify->getLogin();
+            echo $loginM;
+            if ($itemToModify->getLogin() != $loginM) {
+                echo "login";
+                $itemToModify->setLogin($loginM);
+            }
+            if ($itemToModify->getClub() != $club) {
+                echo "club";
+                $itemToModify->setClub($club);
+            }
+        }
+
+        $em->persist($itemToModify);
+        $em->flush();
+
+        return $app->redirect($url . 'gestion_president');
+    }
 }
 
 ?>

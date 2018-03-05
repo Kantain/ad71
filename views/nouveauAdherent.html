@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AD71</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
+</head>
+<body>
+	<header>
+		AD71
+	</header>
+	<main>
+		{% if session.isConnectedAdmin == false %}
+		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
+			<input type="text" name="login" placeholder="login">
+			<input type="password" name="mdp" placeholder="mot de passe">
+			<input type="submit" name="btconnexion">
+		</form>
+		{% else %}
+		{% set infos=adherent[0] %}
+		<h2>Profil en attente de {{infos[1]}} {{infos[2]}}</h2>
+		<div id="menu_horizontal">
+			<a href="{{app.request.basepath}}/">Accueil</a>
+			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+			<a href="javascript:history.back()">Retour</a>
+		</div>
+		{% if nouveau %}
+		<h3>Aucun adhérent trouvé avec cet état civil</h3>
+		{% else %}
+		<h3>Il y a déjà un adhérent avec cet état civil</h3>
+		{% endif %}
+		<form>
+			<legend>Nom</legend>
+			<input type="text" name="nom" value="{{infos[1]}}">
+			<legend>Prénom</legend>
+			<input type="text" name="nom" value="{{infos[2]}}">
+			<legend>Sexe</legend>
+			<input type="radio" name="sexe" value="M" {% if infos[0]=='Monsieur' %} checked {% endif %}><label>M</label>
+			<input type="radio" name="sexe" value="F" {% if infos[0]=='Madame' or infos[0]=='Mademoiselle' %} checked {% endif %}><label>F</label>
+			<div>
+				<legend>Date de naissance</legend>
+				<input type="text" maxlength="2" size="1" name="dateJour" value="{{infos[3]}}"> /
+				<input type="text" maxlength="2" size="1" name="dateMois" value="{{infos[4]}}"> /
+				<input type="text" maxlength="4" size="3" name="dateAnnee" value="{{infos[5]}}">
+			</div>
+			<legend>Lieu de naissance</legend>
+			<input type="text" name="nom" value="{{infos[6]}}">
+			<legend>Nationalité</legend>
+			<input type="text" name="nom" value="{{infos[7]}}">
+			<legend>N° Sécurité Sociale</legend>
+			<input type="text" name="nom" value="{{infos[8]}}">
+			<legend>Adresse</legend>
+			<input type="text" name="nom" value="{{infos[9]}}">
+			<legend>Code Postal</legend>
+			<input type="text" name="nom" value="{{infos[10]}}">
+			<legend>Ville</legend>
+			<input type="text" name="nom" value="{{infos[11]}}">
+			<legend>Téléphone fixe</legend>
+			<input type="text" name="nom" value="{{infos[12]}}">
+			<legend>Téléphone mobile 1</legend>
+			<input type="text" name="nom" value="{{infos[13]}}">
+			<legend>Téléphone mobile 2</legend>
+			<input type="text" name="nom" value="{{infos[14]}}">
+			<legend>email</legend>
+			<input type="text" name="nom" value="{{infos[15]}}"><br>
+			<input type="submit" name="valider" value="valider">
+		</form>
+		{% endif %}
+	</main>
+</body>
+</html>

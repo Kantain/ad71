@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>AD71</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
 	<header>
@@ -15,21 +17,25 @@
 			<input type="submit" name="btconnexion">
 		</form>
 		{% else %}
-		<a href="{{app.request.basepath}}/">Accueil</a>
-		<a href="{{app.request.basepath}}/messages">Messagerie</a>
-		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a><br>
-		<h1>Panneau de modification du profil sportif</h1>
+		<h2>Panneau de modification du profil sportif</h2>
+		<div id="menu_horizontal">
+			<a href="{{app.request.basepath}}/">Accueil</a>
+			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+			<a href="javascript:history.back()">Retour</a>
+		</div>
 		<form action="{{app.request.basepath}}/adherent/{{numero}}/modifier/sportif" method="post" name="modifSportif">
 			<legend>N° de licence</legend>
 			<input type="text" name="no_licence" value="{{profil.getNoLicence}}">
 			<legend>Membre AD71</legend>
 			<select name="membre_ad_71">
 				{% if profil.getMembreAd71==1 %}
-				<option value="oui" selected="selected">Oui</option>
-				<option value="non">Non</option>
+				<option value="1" selected="selected">Oui</option>
+				<option value="0">Non</option>
 				{% else %}
-				<option value="oui">Oui</option>
-				<option value="non" selected="selected">Non</option>
+				<option value="1">Oui</option>
+				<option value="0" selected="selected">Non</option>
 				{% endif %}
 			</select>
 			<legend>Dojo</legend>
@@ -40,7 +46,7 @@
 			<input type="text" name="attestation_sante" value="{{profil.getAttestationSante}}">
 			{% if age<18 %}
 			<legend>Autorisation parentale</legend>
-			<input type="text" name="autorisation_parentale" value="{{profil.getAutorisationParentale}}">
+			<input type="text" name="autorisation_parentale" value="{{profil.getAutorisationParent}}">
 			<legend>Autorisation prélèvement</legend>
 			<input type="text" name="autorisation_prelevement" value="{{profil.getAutorisationPrelevement}}">
 			{% endif %}

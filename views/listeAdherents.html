@@ -2,24 +2,33 @@
 <html>
 <head>
 	<title>AD71</title>
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
 	<header>
-		AD71
+		Alliance Dojo 71
 	</header>
 	<main>
 		{% if session.isConnectedAdmin == false %}
-			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
-				<input type="text" name="login" placeholder="login">
-				<input type="password" name="mdp" placeholder="mot de passe">
-				<input type="submit" name="btconnexion">
-			</form>
+		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
+			<input type="text" name="login" placeholder="login">
+			<input type="password" name="mdp" placeholder="mot de passe">
+			<input type="submit" name="btconnexion">
+		</form>
 		{% else %}
-			<p>messagerie admin</p>
+		<h2>Liste des adhérents</h2>
+		<div id="menu_horizontal">
 			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
-			<table>
+			<a href="javascript:history.back()">Retour</a>
+		</div>
+		<div>
+			{% if attente > 0 %}
+			<a href="{{app.request.basepath}}/liste/attente">{{attente}} en attente</a>
+			{% endif %}
+			<table id="admin_table">
 				<th>N° adhérent</th>
 				<th>Nom</th>
 				<th>Prénom</th>
@@ -31,8 +40,8 @@
 				<th>Telephone portable</th>
 				<th>email</th>
 				<th>Afficher profil</th>
-			{% for adherent in adherents %}
-				<tr>
+				{% for adherent in adherents %}
+				<tr onclick="window.location.href={{app.request.basepath}}/adherent/{{adherent.getNoAdherent}}';">
 					<td>{{adherent.getNoAdherent}}</td>
 					<td>{{adherent.getNom}}</td>
 					<td>{{adherent.getPrenom}}</td>
@@ -45,9 +54,10 @@
 					<td>{{adherent.getEmail}}</td>
 					<td><a href="{{app.request.basepath}}/adherent/{{adherent.getNoAdherent}}">voir</a></td>
 				</tr>
-			{% endfor %}
+				{% endfor %}
 			</table>
 			<a href="{{app.request.basepath}}/majListe">Remplir</a>
+		</div>
 		{% endif %}
 	</main>
 </body>

@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>AD71</title>
-	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
@@ -17,19 +16,26 @@
 			<input type="submit" name="btconnexion">
 		</form>
 		{% else %}
-		<h2>Modifier le profil</h2>
+		<h2>Gestion des présidents</h2>
 		<div id="menu_horizontal">
 			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/gestion_president">Gérer les présidents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
-			<a href="javascript:history.back()">Retour</a>
 		</div>
 		<div>
-			<a href="{{app.request.basepath}}/adherent/{{numero}}/modifier/administratif">Modifier le profil administratif</a>
-		</div>
-		<div>
-			<a href="{{app.request.basepath}}/adherent/{{numero}}/modifier/sportif">Modifier le profil sportif</a>
+			<table id="admin_table">
+				<tr><th>Président</th><th>Club</th><th>Modifier</th></tr>
+				{% if presidents %}
+				{% for president in presidents %}
+				<tr><td>{{president.getLogin}}</td><td>{{president.getClub}}</td><td><a href="{{app.request.basepath}}/modifier_president/{{president.getLogin}}">Modifier</a></td></tr>
+				{% endfor %}
+				{% else %}
+				<tr><td colspan="3">Aucun président</td></tr>
+				{% endif %}
+				<tr><td colspan="3"><a href="{{app.request.basepath}}/ajouter_president/">Ajouter</a></td></tr>
+			</table>
 		</div>
 		{% endif %}
 	</main>

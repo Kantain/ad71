@@ -2,29 +2,27 @@
 <html>
 <head>
 	<title>AD71</title>
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/style.css">
 </head>
 <body>
 	<header>
-		AD71
+		Intranet Alliance Dojo 71
 	</header>
-	{#<nav>
-		<ul>
-			<li><a href="{{app.request.basepath}}/">Accueil</a></li>
-			<li><a href="{{app.request.basepath}}/contact">Contact</a></li>
-			<li><a href="{{app.request.basepath}}/articles">Ecrire un article</a></li>
-		</ul>
-	</nav>#}
 	<main>
 		{% if (session.isConnected==false) or (session.isConnectedAdmin == false) %}
+		<div id="form_connexion">
+
 			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
-				<input type="text" name="login" placeholder="login">
-				<input type="password" name="mdp" placeholder="mot de passe">
-				<input type="submit" name="btconnexion">
+				<h5>Connectez-vous ou remplissez votre fiche adhérent</h5>
+				<input type="text" name="login" placeholder="Login">
+				<input type="password" name="mdp" placeholder="Mot de Passe">
+				<input type="submit" value="Connexion" name="btconnexion">
+				<a href="{{app.request.basepath}}/formulaire">Remplir ma fiche</a>
 			</form>
-			<a href="{{app.request.basepath}}/formulaire">Remplir ma fiche</a>
+		</div>
 		{% else %}
-			<p>connecté</p>
-			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+		<p>connecté</p>
+		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 		{% endif %}
 	</main>
 </body>

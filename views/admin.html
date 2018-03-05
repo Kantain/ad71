@@ -2,30 +2,30 @@
 <html>
 <head>
 	<title>AD71</title>
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
 	<header>
-		AD71
+		Alliance Dojo 71
 	</header>
-	{#<nav>
-		<ul>
-			<li><a href="{{app.request.basepath}}/">Accueil</a></li>
-			<li><a href="{{app.request.basepath}}/contact">Contact</a></li>
-			<li><a href="{{app.request.basepath}}/articles">Ecrire un article</a></li>
-		</ul>
-	</nav>#}
 	<main>
 		{% if session.isConnectedAdmin == false %}
+		<div id="form_connexion">
 			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
 				<input type="text" name="login" placeholder="login">
 				<input type="password" name="mdp" placeholder="mot de passe">
 				<input type="submit" name="btconnexion">
 			</form>
+		</div>
 		{% else %}
-			<p>connecté admin</p>
+		<h2>Bonjour M. Piejak</h2>
+		<div id="menu_accueil">
+			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/gestion_president">Gérer les présidents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+		</div>
 		{% endif %}
 	</main>
 </body>

@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>AD71</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
@@ -9,17 +10,28 @@
 		AD71
 	</header>
 	<main>
-		{% if session.isConnected == false %}
+		{% if session.isConnectedAdmin == false %}
 		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
 			<input type="text" name="login" placeholder="login">
 			<input type="password" name="mdp" placeholder="mot de passe">
 			<input type="submit" name="btconnexion">
 		</form>
 		{% else %}
-		<div id="menu_accueil">
+		<h2>liste attente</h2>
+		<div id="menu_horizontal">
+			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+			<a href="javascript:history.back()">Retour</a>
 		</div>
+		<table id="admin_table">
+			<tr><th colspan="2">Profil</th></tr>
+			{% for element in liste %}
+			{% set nomElement=element|split('.') %}
+			<tr><td>{{nomElement[0]}}</td><td><a href="{{app.request.basepath}}/adherent/ajouter/{{nomElement[0]}}">Vérifier</a></td></tr>
+			{% endfor %}
+		</table>
 		{% endif %}
 	</main>
 </body>

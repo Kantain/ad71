@@ -8,6 +8,7 @@ use pw\Services\SessionStorage;
 use pw\Controllers\UserController;
 use pw\Controllers\MessageController;
 use pw\Controllers\AdherentController;
+use pw\Controllers\PresidentController;
 
 $app = new Silex\Application();
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -49,7 +50,7 @@ $app->get('/formulaire', function() use ($app){
 	return $app['twig']->render('formulaire.html', ['session' => $app['session']]);
 });
 
-$app->post('/formulaire', 'pw\\Controllers\\AdherentController::ajoutAdherent');
+$app->post('/formulaire', 'pw\\Controllers\\AdherentController::ajoutAdherentFormulaire');
 
 $app->get('/connexion', function() use ($app){
 	$url = $app['url_generator']->generate('home');
@@ -84,7 +85,18 @@ $app->get('/liste', function() use ($app){
 	$url = $app['url_generator']->generate('home');
 	if($app['session']->isConnectedAdmin()){
 		$ac = new AdherentController();
-		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherent($app) ]);
+		$nb_attente = $ac->compterAttente($app);
+		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherent($app), 'attente' => $nb_attente]);
+	}
+	return $app->redirect($url);
+});
+
+$app->get('/liste/attente', function() use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$ac = new AdherentController();
+		$fichiers = $ac->listeAttente($app);
+		return $app['twig']->render('listeAttente.html', ['session' => $app['session'], 'liste' => $fichiers]);
 	}
 	return $app->redirect($url);
 });
@@ -126,6 +138,8 @@ $app->get('/adherent/{numero}/modifier/administratif', function($numero) use ($a
 	return $app->redirect($url);
 });
 
+$app->post('/adherent/{numero}/modifier/administratif', 'pw\\Controllers\\AdherentController::modifierAdherentAdministratif');
+
 $app->get('/adherent/{numero}/modifier/sportif', function($numero) use ($app){
 	$url = $app['url_generator']->generate('home');
 	if($app['session']->isConnectedAdmin()){
@@ -138,6 +152,47 @@ $app->get('/adherent/{numero}/modifier/sportif', function($numero) use ($app){
 });
 
 $app->post('/adherent/{numero}/modifier/sportif', 'pw\\Controllers\\AdherentController::modifierAdherentSportif');
+
+$app->get('/adherent/ajouter/{nom}', function($nom) use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$ac = new AdherentController();
+		$adherent = $ac->getFichier($nom . '.csv');
+		$nouveau = $ac->verifierNouveau($app,$nom);
+		return $app['twig']->render('nouveauAdherent.html', ['session' => $app['session'], 'adherent' => $adherent, 'nouveau' => $nouveau ]);
+	}
+	return $app->redirect($url . '/liste/attente');
+});
+
+$app->get('/gestion_president', function() use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$uc = new UserController();
+		$listePresident = $uc->listePresident($app);
+		return $app['twig']->render('adminGestionPresident.html', ['session' => $app['session'], 'presidents' => $listePresident]);
+	}
+	return $app->redirect($url);
+});
+
+$app->get('/modifier_president/{login}', function($login) use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		$uc = new UserController();
+		$president = $uc->getPresident($app, $login);
+		return $app['twig']->render('adminModifierPresident.html', ['session' => $app['session'], 'president' => $president]);
+	}
+	return $app->redirect($url);
+});
+
+$app->post('modifier_president/{login}', 'pw\\Controllers\\UserController::modifierPresident');
+
+$app->get('ajouter_president',function() use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		return $app['twig']->render('adminAjouterPresident.html', ['session' => $app['session']]);
+	}
+	return $app->redirect($url);
+});
 
 $app['debug'] = true;
 $app->run();

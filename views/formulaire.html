@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>AD71</title>
+	<title>Alliance Dojo 71</title>
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/style.css">
 </head>
 <body>
 	<header>
-		AD71
+		Alliance Dojo 71
 	</header>
 	<main>
-		<form action = "{{app.request.basepath}}/formulaire" method="post">
-			<h2>Etat civil</h2>
-			<legend>Civilite :</legend>
-			<input type="radio" name="civilite" value="Monsieur"/> <label for="Monsieur">Monsieur</label>
-			<input type="radio" name="civilite" value="Madame"/> <label for="Madame">Madame</label>
-			<input type="radio" name="civilite" value="Mademoiselle"/> <label for="Mademoiselle">Mademoiselle</label>
-			<br>
-			<legend>Nom :</legend>
-			<input type="text" name = "nom" placeholder="Votre nom" required />
-			<br>
-			<legend>Prenom :</legend>
-			<input type="text" name = "prenom" placeholder="Votre prenom" required>
-			<br>
-			<legend>Date de naissance :</legend>
-			<input type="text" name="date de naissance" placeholder="jj/mm/aaaa" required/>
-			<br>
-			Lieu de naissance :
-			<input type="text" name ="lieu de naissance" placeholder="Votre lieu de naissance" required/>
-			<br>
-			Nationalite :
-			<input type="text" name="nationalite" value="Francaise" required/>
-			<br>
-			No securite sociale :
-			<input type="text" name = "secu sociale" placeholder="Votre no securite sociale" required/>
-			<h2>Adresse</h2>
-			Adresse :
-			<input type="textarea" name="adresse" placeholder="Rue 1" required/>
-			<br>
-			Code postal :
-			<input type="text" name = "code postal" placeholder="Code postal" required/>
-			<br>
-			Ville :
-			<input type="text" name ="ville" placeholder="Ville" required/>
-			<h2>Contact</h2>
-			Telephone :
-			<input type="text" name = "telephone" placeholder="Telephone" required/>
-			<br>
-			Mobile :
-			<input type="text" name = "mobile" placeholder="Mobile" required/>
-			<br>
-			Adresse Email :
-			<input type="text" name = "email" placeholder="Adresse email" required/>
-			<br>
-			<input type="checkbox" name="case" id="case"/> <label for="case" >J'accepte de recevoir la newsletter (maxi 1 fois par mois)</label>
-			<br>
-			<input type="submit" name="Continuer"/>
-		</form>
+		<div id="form_fiche">
+			<div id="form_fiche_div">
+				<form id="form_fiche_retour"><input type="button" value="Retour" onclick="history.back()"></form>
+			</div>
+			<div id="form_fiche_div">
+				<form action = "{{app.request.basepath}}/formulaire" method="post">
+					<p>Etat civil</p>
+					<legend>Civilite</legend>
+					<div id="form_fiche_civ">
+						<input type="radio" name="civilite" value="Monsieur"/> <label for="Monsieur">Monsieur</label>
+						<input type="radio" name="civilite" value="Madame"/> <label for="Madame">Madame</label>
+						<input type="radio" name="civilite" value="Mademoiselle"/> <label for="Mademoiselle">Mademoiselle</label>
+					</div>
+					<legend>Nom</legend>
+					<input type="text" name = "nom" placeholder="Votre nom" required />
+					<legend>Prénom</legend>
+					<input type="text" name = "prenom" placeholder="Votre prénom" required>
+					<legend>Date de naissance</legend>
+					<div id="form_fiche_civ">
+						<input type="text" maxlength="2" size="1" name="dateJour" placeholder="JJ"> /
+						<input type="text" maxlength="2" size="1" name="dateMois" placeholder="MM"> /
+						<input type="text" maxlength="4" size="3" name="dateAnnee" placeholder="AAAA">
+					</div>
+					<legend>Lieu de Naissance</legend>
+					<input type="text" name ="lieu_n" placeholder="Votre lieu de naissance" required/>
+					<legend>Nationalité</legend>
+					<input type="text" name="nationalite" value="Francaise" required/>
+					<legend>N° Sécurite Sociale</legend>
+					<input type="text" name = "no_secu_sociale" placeholder="Votre no securite sociale" required/>
+
+					<p>Adresse</p>
+					<legend>Adresse</legend>
+					<input type="textarea" name="adresse" placeholder="Libellé de Rue" required/>
+					<legend>Code postal</legend>
+					<input type="text" name = "code_postal" placeholder="Code postal" required/>
+					<legend>Ville</legend>
+					<input type="text" name ="ville" placeholder="Ville" required/>
+
+					<p>Contact</p>
+					<legend>Téléphone</legend>
+					<input type="text" name = "tel_f" placeholder="Telephone" required/>
+					<legend>Mobile 1</legend>
+					<input type="text" name = "tel_m_1" placeholder="Mobile 1" required/>
+					<legend>Mobile 2</legend>
+					<input type="text" name = "tel_m_2" placeholder="Mobile 2"/>
+					<legend>email</legend>
+					<input type="email" name = "email" placeholder="Adresse email" required/>
+					<br>
+					<div id="form_fiche_civ">
+						<input type="checkbox" name="case" id="case"/><label for="case">J'accepte de recevoir la newsletter (max 1 fois par mois)</label>
+					</div>
+					<br>
+					<input type="submit" name="Continuer"/>
+				</form>
+			</div>
+		</div>
 	</main>
 </body>
 </html>

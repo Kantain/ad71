@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>AD71</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
 	<header>
@@ -15,42 +17,48 @@
 			<input type="submit" name="btconnexion">
 		</form>
 		{% else %}
-		<a href="{{app.request.basepath}}/">Accueil</a>
-		<a href="{{app.request.basepath}}/messages">Messagerie</a>
-		<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
-		<table>
-			<tr><th>Données administratives</th></tr>
-			<tr><td>N° d'adhérent :</td><td>{{adherentAdministratif.getNoAdherent}}</td></tr>
-			<tr><td>Nom :</td><td>{{adherentAdministratif.getNom}}</td></tr>
-			<tr><td>Prenom :</td><td>{{adherentAdministratif.getPrenom}}</td></tr>
-			<tr><td>Date de Naissance :</td><td>{{adherentAdministratif.getDateN}}</td></tr>
-			<tr><td>Nationalité :</td><td>{{adherentAdministratif.getNationalite}}</td></tr>
-			<tr><td>N° Sécurité Sociale :</td><td>{{adherentAdministratif.getNoSecuSociale}}</td></tr>
-			<tr><td>Adresse :</td><td>{{adherentAdministratif.getAdresse}}</td></tr>
-			<tr><td>Code Postal :</td><td>{{adherentAdministratif.getCodePostal}}</td></tr>
-			<tr><td>Tél Fixe :</td><td>{{adherentAdministratif.getTelF}}</td></tr>
-			<tr><td>Tél Mobile 1 :</td><td>{{adherentAdministratif.getTelM1}}</td></tr>
-			<tr><td>Tél Mobile 2 :</td><td>{{adherentAdministratif.getTelM2}}</td></tr>
-			<tr><td>email :</td><td>{{adherentAdministratif.getEmail}}</td></tr>
-		</table>
-		<a href="{{app.request.basepath}}/adherent/{{adherentAdministratif.getNoAdherent}}/modifier">Modifier Profil</a>
-		<table>
-			<tr><th>Données sportives</th></tr>
-			<tr><td>N° de licence :</td><td>{{adherentSportif.getNoLicence}}</td></tr>
-			<tr><td>Membre du bureau :</td><td>{% if adherentSportif.getMembreAd71 == 1 %}Oui{% else %}Non{% endif %}</td></tr>
-			<tr><td>Dojo :</td><td>{{adherentSportif.getDojo}}</td></tr>
-			<tr><td>Certificat médical :</td><td>{{adherentSportif.getCertificatMed}}</td></tr>
-			<tr><td>Date du Certificat :</td><td>{{adherentSportif.getDateCertificat}}</td></tr>
-			<tr><td>Attestation de Santé :</td><td>{{adherentSportif.getAttestationSante}}</td></tr>
-			{% if adherentAdministratif.getAge<18 %}
-			<tr><td>Autorisation Parentale :</td><td>{{adherentSportif.getAutorisationParent}}</td></tr>
-			<tr><td>Autorisation prélèvement :</td><td>{{adherentSportif.getAutorisationPrelevement}}</td></tr>
-			{% endif %}
-			<tr><td>Location Kimono :</td><td>{{adherentSportif.getLocationKimono}}</td></tr>
-			<tr><td>N° Passeport :</td><td>{{adherentSportif.getNoPasseport}}</td></tr>
-			<tr><td>Catégorie (age) :</td><td>{{adherentSportif.getCategorieAge}}</td></tr>
-			<tr><td>Catégorie (poids) :</td><td>{{adherentSportif.getCategoriePoids}}</td></tr>
-		</table>
+		<h2>Profil de {{adherentAdministratif.getNom}} {{adherentAdministratif.getPrenom}}</h2>
+		<div id="menu_horizontal">
+			<a href="{{app.request.basepath}}/">Accueil</a>
+			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+			<a href="javascript:history.back()">Retour</a>
+		</div>
+		<div>
+			<table id="admin_table">
+				<tr><th colspan="2">Données administratives</th></tr>
+				<tr><td>N° d'adhérent :</td><td>{{adherentAdministratif.getNoAdherent}}</td></tr>
+				<tr><td>Nom :</td><td>{{adherentAdministratif.getNom}}</td></tr>
+				<tr><td>Prenom :</td><td>{{adherentAdministratif.getPrenom}}</td></tr>
+				<tr><td>Date de Naissance :</td><td>{{adherentAdministratif.getDateN}}</td></tr>
+				<tr><td>Nationalité :</td><td>{{adherentAdministratif.getNationalite}}</td></tr>
+				<tr><td>N° Sécurité Sociale :</td><td>{{adherentAdministratif.getNoSecuSociale}}</td></tr>
+				<tr><td>Adresse :</td><td>{{adherentAdministratif.getAdresse}}</td></tr>
+				<tr><td>Code Postal :</td><td>{{adherentAdministratif.getCodePostal}}</td></tr>
+				<tr><td>Tél Fixe :</td><td>{{adherentAdministratif.getTelF}}</td></tr>
+				<tr><td>Tél Mobile 1 :</td><td>{{adherentAdministratif.getTelM1}}</td></tr>
+				<tr><td>Tél Mobile 2 :</td><td>{{adherentAdministratif.getTelM2}}</td></tr>
+				<tr><td>email :</td><td>{{adherentAdministratif.getEmail}}</td></tr>
+			</table>
+			<table id="admin_table">
+				<tr><th colspan="2">Données sportives</th></tr>
+				<tr><td>N° de licence :</td><td>{{adherentSportif.getNoLicence}}</td></tr>
+				<tr><td>Membre du bureau :</td><td>{% if adherentSportif.getMembreAd71 == 1 %}Oui{% else %}Non{% endif %}</td></tr>
+				<tr><td>Dojo :</td><td>{{adherentSportif.getDojo}}</td></tr>
+				<tr><td>Certificat médical :</td><td>{{adherentSportif.getCertificatMed}}</td></tr>
+				<tr><td>Date du Certificat :</td><td>{{adherentSportif.getDateCertificat}}</td></tr>
+				<tr><td>Attestation de Santé :</td><td>{{adherentSportif.getAttestationSante}}</td></tr>
+				{% if adherentAdministratif.getAge<18 %}
+				<tr><td>Autorisation Parentale :</td><td>{{adherentSportif.getAutorisationParent}}</td></tr>
+				<tr><td>Autorisation prélèvement :</td><td>{{adherentSportif.getAutorisationPrelevement}}</td></tr>
+				{% endif %}
+				<tr><td>Location Kimono :</td><td>{{adherentSportif.getLocationKimono}}</td></tr>
+				<tr><td>N° Passeport :</td><td>{{adherentSportif.getNoPasseport}}</td></tr>
+				<tr><td>Catégorie (age) :</td><td>{{adherentSportif.getCategorieAge}}</td></tr>
+				<tr><td>Catégorie (poids) :</td><td>{{adherentSportif.getCategoriePoids}}</td></tr>
+			</table>
+		</div>
 		<a href="{{app.request.basepath}}/adherent/{{adherentAdministratif.getNoAdherent}}/modifier">Modifier Profil</a>
 		{% endif %}
 	</main>
