@@ -116,6 +116,66 @@ a:hover{
 	background-color: #DDDDDD;
 	color: #777777;
 	font-size: 20px;
-	font-weight: normal;
+	font-weight: bolder;
 	border: 1px solid;
+}
+
+#form-modification{
+	display: inline-block;
+	padding: 5px;
+	background-color: white;
+	text-align: center;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#form-modification input[type="text"], #form-modification input[type="email"], #form-modification select{
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+#form-modification select{
+	text-align: center;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+    text-overflow: '';
+}
+
+#form-modification select option{
+	text-align: center;
+}
+
+#form-modification>*{
+	margin: 2px;
+	width: 80%;
+}
+
+#form-modification>*>*, #form-modification>input{
+	text-align: center;
+}
+
+#form-modification legend, #form-modification div{
+	width: 100%;
+}
+
+#select-club{
+	transition: 0.2s ease;
+}
+
+#select-club:active{
+	transition: 0.2s ease;
+}
+
+#conteneur-profil>*{
+	display: inline-block;
+}
+
+.div-profil>*{
+	display: block;
+}
+
+.div-profil a{
+	font-size: 17px;
+	font-weight: bolder;
 }

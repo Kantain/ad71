@@ -23,12 +23,21 @@
 			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
 			<a href="{{app.request.basepath}}/gestion_president">Gérer les présidents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
+			<a href="javascript:history.back()">Retour</a>
 		</div>
-		<form method="post" action="{{app.request.basepath}}/modifier_president/{{president.getLogin}}">
+		<form id="form-modification" method="post" action="{{app.request.basepath}}/modifier_president/{{president.getLogin}}">
 			<legend>Login</legend>
 			<input type="text" name="login" value="{{president.getLogin}}">
 			<legend>Club</legend>
-			<input type="text" name="club" value="{{president.getClub}}"><br>
+			<select id="select-club-" name="club">
+				<option value="A">SAINT VALLIER</option>
+				<option value="B">MONTCHANIN</option>
+				<option value="C">SANVIGNES LES MINES</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+				<option value="F">CLUNY</option>
+			</select>
+			<br>
 			<input type="submit" name="modifier" value="Modifier">
 		</form>
 		{% endif %}

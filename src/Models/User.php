@@ -6,8 +6,8 @@ class User{
 	protected $password;
 	protected $club;
 
-    private $clubToLetter = {'A' => 'SAINT VALLIER', 'B' => 'MONTCHANIN', 'C' => 'SANVIGNES LES MINES', 'D' => 'D', 'E' => 'E', 'F' => 'CLUNY'};
-    private $letterToClub = {'SAINT VALLIER'=> 'A', 'MONTCHANIN' => 'B', 'SANVIGNES LES MINES' => 'C', 'D' => 'D', 'E' => 'E', 'CLUNY' => 'F'};
+    private $clubToLetter = ['A' => 'SAINT VALLIER', 'B' => 'MONTCHANIN', 'C' => 'SANVIGNES LES MINES', 'D' => 'D', 'E' => 'E', 'F' => 'CLUNY'];
+    private $letterToClub = ['SAINT VALLIER'=> 'A', 'MONTCHANIN' => 'B', 'SANVIGNES LES MINES' => 'C', 'D' => 'D', 'E' => 'E', 'CLUNY' => 'F'];
 
 	function __construct($_login, $_password, $_club){
 		$this->login = $_login;
@@ -24,11 +24,11 @@ class User{
 	}
 
 	function getClub(){
-		if (!is_null($clubToLetter[$this->club])) {
-			return $clubToLetter[$this->club];
+		if (!is_null($this->clubToLetter[$this->club])) {
+			return $this->clubToLetter[$this->club];
 		}
-		if (!is_null($letterToClub[$this->club])) {
-			return $letterToClub[$this->club];
+		if (!is_null($this->letterToClub[$this->club])) {
+			return $this->letterToClub[$this->club];
 		}
 	}
 
@@ -41,7 +41,12 @@ class User{
 	}
 
 	function setClub($_club){
-		$this->club = $_club;
+		if (!is_null($this->letterToClub[$_club])) {
+			$this->club = $this->letterToClub[$_club];
+		}
+		else{
+			$this->club = $_club;
+		}
 	}
 }
 ?>

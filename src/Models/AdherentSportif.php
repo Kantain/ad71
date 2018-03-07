@@ -18,8 +18,7 @@ class AdherentSportif
 	protected $categorie_age;
 	protected $categorie_poids;
 
-	public function __construct($_no_licence, $_no_adherent, $_membre_ad_71, $_dojo, $_certificat_med, $_date_certificat, $_attestation_sante, $_autorisation_parent, $_autorisation_prelevement, $_location_kimono, $_no_passeport, $_categorie_age, $_categorie_poids)
-	{
+	public function __construct($_no_licence, $_no_adherent, $_membre_ad_71, $_dojo, $_certificat_med, $_date_certificat, $_attestation_sante, $_autorisation_parent, $_autorisation_prelevement, $_location_kimono, $_no_passeport, $_categorie_age, $_categorie_poids){
 		$this->no_licence=$_no_licence;
 		$this->no_adherent = $_no_adherent;
 		$this->membre_ad71=$_membre_ad_71;
@@ -33,6 +32,20 @@ class AdherentSportif
 		$this->no_passeport=$_no_passeport;
 		$this->categorie_age=$_categorie_age;
 		$this->categorie_poids=$_categorie_poids;	
+	}
+
+	public function setAdherentSportif($_membre_ad_71, $_dojo, $_certificat_med, $_date_certificat, $_attestation_sante, $_autorisation_parent, $_autorisation_prelevement, $_location_kimono, $_no_passeport, $_categorie_age, $_categorie_poids){
+		$this->membre_ad71=$_membre_ad_71;
+		$this->dojo=$_dojo;
+		$this->certificat_med=$_certificat_med;
+		$this->date_certificat=$_date_certificat;
+		$this->attestation_sante=$_attestation_sante;
+		$this->autorisation_parent=$_autorisation_parent;
+		$this->autorisation_prelevement=$_autorisation_prelevement;
+		$this->location_kimono=$_location_kimono;
+		$this->no_passeport=$_no_passeport;
+		$this->categorie_age=$_categorie_age;
+		$this->categorie_poids=$_categorie_poids;
 	}
 
 	public function getNoLicence(){

@@ -92,7 +92,9 @@ class UserController{
         $url = $app['url_generator']->generate('home');
 
         $loginM = $request->request->all()["login"];
-        $club = $request->request->all()["club"];
+        $club = $request->request->get('club');
+
+        var_dump($request->request);
 
         if (!is_null($loginM)) {
             echo "ok";
@@ -104,7 +106,7 @@ class UserController{
                 $itemToModify->setLogin($loginM);
             }
             if ($itemToModify->getClub() != $club) {
-                echo "club";
+                echo $club;
                 $itemToModify->setClub($club);
             }
         }

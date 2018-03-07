@@ -7,13 +7,6 @@
 	<header>
 		AD71
 	</header>
-	{#<nav>
-		<ul>
-			<li><a href="{{app.request.basepath}}/">Accueil</a></li>
-			<li><a href="{{app.request.basepath}}/contact">Contact</a></li>
-			<li><a href="{{app.request.basepath}}/articles">Ecrire un article</a></li>
-		</ul>
-	</nav>#}
 	<main>
 		{% if session.isConnected == false %}
 			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">

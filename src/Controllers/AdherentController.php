@@ -85,21 +85,18 @@ class AdherentController{
 
             $cat = $this->categorie($infos[7]);
 
-            $adherentA = new AdherentAdministratif('default',$infos[4],$infos[5],$infos[6], $infos[7], 'à définir', 'français', 'à définir', $infos[8] . " " . $infos[9], $infos[10], $infos[11], $infos[12], $infos[14], $infos[13], $infos[16], 'à définir', 'à définir');
-            $em->persist($adherentA);
-            $em->flush();
+            if($this->verifierNouveau($app,$infos[4] . "_" . $infos[5])){
+                $adherentA = new AdherentAdministratif('default',$infos[4],$infos[5],$infos[6], $infos[7], 'à définir', 'français', 'à définir', $infos[8] . " " . $infos[9], $infos[10], $infos[11], $infos[12], $infos[14], $infos[13], $infos[16], 'à définir', 'à définir');
+                $em->persist($adherentA);
+                $em->flush();
 
-            $repo = $em->getRepository('pw\\Models\\AdherentAdministratif');
-            $adh = $repo->findOneBy(array(), array('no_adherent' => 'DESC'));
+                $repo = $em->getRepository('pw\\Models\\AdherentAdministratif');
+                $adh = $repo->findOneBy(array(), array('no_adherent' => 'DESC'));
 
-            $adherentS = new AdherentSportif($infos[1], $adh->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
-            try{
+                $adherentS = new AdherentSportif($infos[1], $adh->getNoAdherent(), 'non', $infos[3],'nom', 'à faire', 'non', 'non', 'non', 'non', 'à faire', $cat, 'à définir');
+
                 $em->persist($adherentS);
                 $em->flush();
-            }
-            catch(\Doctrine\DBAL\DBALException $e){
-                if($e->getErrorCode() != $error_code_for_dupes)
-                    throw $e;                    
             }
 
             $i++;

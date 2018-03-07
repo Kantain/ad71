@@ -22,21 +22,24 @@
 			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			<a href="{{app.request.basepath}}/gestion_president">Gérer les présidents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 			<a href="javascript:history.back()">Retour</a>
 		</div>
-		<form action="{{app.request.basepath}}/adherent/{{numero}}/modifier/administratif" method="post" name="modifAdministratif">
+		<form id="form-modification" action="{{app.request.basepath}}/adherent/{{numero}}/modifier/administratif" method="post" name="modifAdministratif">
 			<legend>N° d'adhérent</legend>
 			<input type="text" name="no_adherent" value="{{profil.getNoAdherent}}" disabled="disabled" readonly>
 			<legend>Nom</legend>
 			<input type="text" name="nom" value="{{profil.getNom}}">
 			<legend>Prenom</legend>
 			<input type="text" name="prenom" value="{{profil.getPrenom}}">
-			<legend>Sexe</legend>
-			<input type="radio" name="sexe" value="M" placeholder="M">
-			<label>M</label>
-			<input type="radio" name="sexe" value="F" placeholder="F">
-			<label>F</label>
+			<div>
+				<legend>Sexe</legend>
+				<input type="radio" name="sexe" value="M" placeholder="M" {% if profil.getSexe== 'M' %} checked {% endif %} >
+				<label>M</label>
+				<input type="radio" name="sexe" value="F" placeholder="F" {% if profil.getSexe== 'F' %} checked {% endif %} >
+				<label>F</label>
+			</div>
 			<div>
 				{% set date = profil.getDateN|split('/',3) %}
 				{% set dateJour = date[0] %}
