@@ -9,7 +9,7 @@
 		Alliance Dojo 71
 	</header>
 	<main>
-		{% if session.isConnectedAdmin == false %}
+		{% if session.isConnectedAdmin == false  and session.isConnected == false  %}
 		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
 			<input type="text" name="login" placeholder="login">
 			<input type="password" name="mdp" placeholder="mot de passe">
@@ -21,13 +21,17 @@
 			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			{% if session.isConnectedAdmin == true %}
 			<a href="{{app.request.basepath}}/gestion_president">Gérer les présidents</a>
+			{% endif %}
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 			<a href="javascript:history.back()">Retour</a>
 		</div>
 		<div>
+			{% if session.isConnectedAdmin == true %}
 			{% if attente > 0 %}
 			<a href="{{app.request.basepath}}/liste/attente">{{attente}} en attente</a>
+			{% endif %}
 			{% endif %}
 			<table id="admin_table">
 				<th>N° adhérent</th>

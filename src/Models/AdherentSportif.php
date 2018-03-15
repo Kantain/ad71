@@ -17,6 +17,7 @@ class AdherentSportif
 	protected $no_passeport;
 	protected $categorie_age;
 	protected $categorie_poids;
+	protected $nom_fichier;
 
 	public function __construct($_no_licence, $_no_adherent, $_membre_ad_71, $_dojo, $_certificat_med, $_date_certificat, $_attestation_sante, $_autorisation_parent, $_autorisation_prelevement, $_location_kimono, $_no_passeport, $_categorie_age, $_categorie_poids){
 		$this->no_licence=$_no_licence;
@@ -176,6 +177,15 @@ class AdherentSportif
 		if (!is_null($_categorie_poids)) {
 			$this->categorie_poids = $_categorie_poids;
 		}
+	}
+
+	public function hasCertificatMedical($nom_fichier){
+		$files = scandir("dossiers/certificats_medicaux");
+		for ($i=0; $i < sizeof($files) ; $i++) { 
+			if($files[$i] == $nom_fichier.".pdf")
+				return true;
+		}
+		return false;
 	}
 }
 ?>

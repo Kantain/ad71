@@ -88,6 +88,10 @@ $app->get('/liste', function() use ($app){
 		$nb_attente = $ac->compterAttente($app);
 		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherent($app), 'attente' => $nb_attente]);
 	}
+	else if($app['session']->isConnected()){
+		$ac = new AdherentController();
+		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherent($app)]);
+	}
 	return $app->redirect($url);
 });
 

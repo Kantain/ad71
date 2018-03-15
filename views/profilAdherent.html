@@ -10,7 +10,7 @@
 		AD71
 	</header>
 	<main>
-		{% if session.isConnectedAdmin == false %}
+		{% if (session.isConnectedAdmin == false) or session.isConnected == false %}
 		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
 			<input type="text" name="login" placeholder="login">
 			<input type="password" name="mdp" placeholder="mot de passe">
@@ -51,7 +51,15 @@
 					<tr><td>N° de licence :</td><td>{{adherentSportif.getNoLicence}}</td></tr>
 					<tr><td>Membre du bureau :</td><td>{% if adherentSportif.getMembreAd71 == 1 %}Oui{% else %}Non{% endif %}</td></tr>
 					<tr><td>Dojo :</td><td>{{adherentSportif.getDojo}}</td></tr>
-					<tr><td>Certificat médical :</td><td>{{adherentSportif.getCertificatMed}}</td></tr>
+					<tr><td>Certificat médical :</td>
+						<td>
+							{% if adherentSportif.hasCertificatMedical(adherentAdministratif.getNomFichier)==true %}
+							<a href="{{app.request.basepath}}/dossiers/certificats_medicaux/{{adherentAdministratif.getNomFichier}}.pdf">Voir</a>
+							{% else %}
+							<strong>A renseigner</strong>
+							{% endif %}
+						</td>
+					</tr>
 					<tr><td>Date du Certificat :</td><td>{{adherentSportif.getDateCertificat}}</td></tr>
 					<tr><td>Attestation de Santé :</td><td>{{adherentSportif.getAttestationSante}}</td></tr>
 					{% if adherentAdministratif.getAge<18 %}

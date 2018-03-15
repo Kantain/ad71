@@ -225,5 +225,9 @@ class AdherentAdministratif
         }
         return $age;
 	}
+
+	public function getNomFichier(){
+		return $this->nom . "_" . $this->prenom;
+	}
 }
 ?>
