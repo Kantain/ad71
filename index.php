@@ -198,5 +198,15 @@ $app->get('ajouter_president',function() use ($app){
 	return $app->redirect($url);
 });
 
+$app->get('modifier_mot_passe',function() use ($app){
+	$url = $app['url_generator']->generate('home');
+	if($app['session']->isConnectedAdmin()){
+		return $app['twig']->render('adminAjouterPresident.html', ['session' => $app['session']]);
+	}
+	return $app->redirect($url);
+});
+
+$app->post('modifier_mot_passe','pw\\Controllers\\UserController::modifierMotDePasse');
+
 $app['debug'] = true;
 $app->run();
