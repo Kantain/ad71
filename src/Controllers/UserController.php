@@ -117,6 +117,27 @@ class UserController{
 
         return $app->redirect($url . 'gestion_president');
     }
+
+    public function modifierMotDePasse(Application $app){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('modifier_mot_passe');
+        if($modif_mdp->isset($_POST['submit'])){
+            $mdp = $_POST['mdp'];
+            $nouveau_mdp = $_POST['nouveau_mdp'];
+            $repeter_mdp = $_POST['repeter_mdp'];
+
+            if(empty($mdp)){
+                echo "Veuillez saisir votre ancien mot de passe";
+            }
+            else if($nouveau_mdp != $repeter_mdp){
+                echo "Vos mots de passe sont différents";
+            }
+        }
+        $em->persist($modif_mdp);
+        $em->flush();
+
+        return $app->redirect($url);
+    }
 }
 
 ?>
