@@ -31,6 +31,7 @@ class UserController{
                 $app['session']->setConnectedAdmin(true);
             else{
                 $app['session']->setPresidentNom($login);
+                $app['session']->setPresidentClub($user->getClubLettre());
                 $app['session']->setConnected(true);
             }
 

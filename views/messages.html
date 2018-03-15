@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>AD71</title>
+	<link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/style/styleAdmin.css">
 </head>
 <body>
 	<header>
@@ -9,20 +10,26 @@
 	</header>
 	<main>
 		{% if session.isConnected == false %}
-			<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
-				<input type="text" name="login" placeholder="login">
-				<input type="password" name="mdp" placeholder="mot de passe">
-				<input type="submit" name="btconnexion">
-			</form>
+		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
+			<input type="text" name="login" placeholder="login">
+			<input type="password" name="mdp" placeholder="mot de passe">
+			<input type="submit" name="btconnexion">
+		</form>
 		{% else %}
-			<p>messagerie président</p>
+		<h2>Messagerie</h2>
+		<div id="menu_horizontal">
 			<a href="{{app.request.basepath}}/">Accueil</a>
+			<a href="{{app.request.basepath}}/messages">Messagerie</a>
+			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
-			<form name="ecrire_message" method="post" action="{{app.request.basepath}}/envoi_message">
-				<input type="textarea" name="contenu">
-				<input type="submit" name="envoyer">
-				<input type="hidden" name="president" value="{{session.getPresidentNom}}">
-			</form>
+			<a href="javascript:history.back()">Retour</a>
+		</div>
+		<form id="form-modification" name="ecrire_message" method="post" action="{{app.request.basepath}}/envoi_message">
+			<legend>Message</legend>
+			<input type="textarea" name="contenu">
+			<input type="submit" name="envoyer">
+			<input type="hidden" name="president" value="{{session.getPresidentNom}}">
+		</form>
 		{% endif %}
 	</main>
 </body>

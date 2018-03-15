@@ -61,7 +61,9 @@
 				</tr>
 				{% endfor %}
 			</table>
+			{% if session.isConnectedAdmin == true %}
 			<a href="{{app.request.basepath}}/majListe">Remplir</a>
+			{% endif %}
 		</div>
 		{% endif %}
 	</main>

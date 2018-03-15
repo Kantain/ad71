@@ -81,6 +81,11 @@ class SessionStorage
         return $this;
     }
 
+    public function setPresidentClub($_club){
+        $_SESSION['president']['club'] = $_club;
+        return $this;
+    }
+
     public function unsetPresident(){
         unset($_SESSION['president']);
         return $this;
@@ -88,6 +93,10 @@ class SessionStorage
 
     public function getPresidentNom(){
         return $_SESSION['president']['nom'];
+    }
+
+    public function getPresidentClub(){
+        return $_SESSION['president']['club'];
     }
 
 }

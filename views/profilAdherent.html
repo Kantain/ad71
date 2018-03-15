@@ -10,7 +10,7 @@
 		AD71
 	</header>
 	<main>
-		{% if (session.isConnectedAdmin == false) or session.isConnected == false %}
+		{% if session.isConnectedAdmin == false and session.isConnected == false %}
 		<form name="connexion" method="post" action="{{app.request.basepath}}/connexion">
 			<input type="text" name="login" placeholder="login">
 			<input type="password" name="mdp" placeholder="mot de passe">
@@ -22,7 +22,9 @@
 			<a href="{{app.request.basepath}}/">Accueil</a>
 			<a href="{{app.request.basepath}}/messages">Messagerie</a>
 			<a href="{{app.request.basepath}}/liste">Liste des adhérents</a>
+			{% if session.isConnectedAdmin == true %}
 			<a href="{{app.request.basepath}}/gestion_president">Gérer les présidents</a>
+			{% endif %}
 			<a href="{{app.request.basepath}}/deconnexion">Déconnexion</a>
 			<a href="javascript:history.back()">Retour</a>
 		</div>
@@ -43,7 +45,9 @@
 					<tr><td>Tél Mobile 2 :</td><td>{{adherentAdministratif.getTelM2}}</td></tr>
 					<tr><td>email :</td><td>{{adherentAdministratif.getEmail}}</td></tr>
 				</table>
+				{% if session.isConnectedAdmin == true %}
 				<a href="{{app.request.basepath}}/adherent/{{adherentAdministratif.getNoAdherent}}/modifier/administratif">Modifier</a>
+				{% endif %}
 			</div>
 			<div class="div-profil">
 				<table id="admin_table">
@@ -71,7 +75,9 @@
 					<tr><td>Catégorie (age) :</td><td>{{adherentSportif.getCategorieAge}}</td></tr>
 					<tr><td>Catégorie (poids) :</td><td>{{adherentSportif.getCategoriePoids}}</td></tr>
 				</table>
+				{% if session.isConnectedAdmin == true %}
 				<a href="{{app.request.basepath}}/adherent/{{adherentAdministratif.getNoAdherent}}/modifier/sportif">Modifier</a>
+				{% endif %}
 			</div>
 		</div>
 		{% endif %}

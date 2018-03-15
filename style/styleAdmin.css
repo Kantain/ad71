@@ -129,7 +129,7 @@ a:hover{
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#form-modification input[type="text"], #form-modification input[type="email"], #form-modification select{
+#form-modification input[type="text"], #form-modification input[type="email"], #form-modification input[type="textarea"], #form-modification select{
 	border: 1px solid;
 	border-radius: 5px;
 	padding: 2px;
@@ -157,6 +157,25 @@ a:hover{
 
 #form-modification legend, #form-modification div{
 	width: 100%;
+}
+
+#form-modification input[type="submit"]{
+	background-color: #19a3e8;
+	text-decoration: none;
+	font-family: calibri;
+	font-size: 20px;
+	border:none;
+	color: white;
+	transition: 0.2s ease;
+}
+
+#form-modification input[type="submit"]:hover{
+	background-color: white;
+	text-decoration: none;
+	color: #19a3e8;
+	padding: 10px;
+	transition: 0.2s ease;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #select-club{
