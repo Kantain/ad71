@@ -90,7 +90,7 @@ $app->get('/liste', function() use ($app){
 	}
 	else if($app['session']->isConnected()){
 		$ac = new AdherentController();
-		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherent($app)]);
+		return $app['twig']->render('listeAdherents.html', ['session' => $app['session'], 'adherents' => $ac->listeAdherentClub($app, $app['session']->getPresidentClub())]);
 	}
 	return $app->redirect($url);
 });
@@ -113,7 +113,7 @@ $app->get('/supprimerMessage/{id}', 'pw\\Controllers\\MessageController::supprim
 
 $app->get('/adherent/{numero}', function($numero) use ($app){
 	$url = $app['url_generator']->generate('home');
-	if($app['session']->isConnectedAdmin()){
+	if($app['session']->isConnectedAdmin() || $app['session']->isConnected()){
 		$ac = new AdherentController();
 		$temp = $ac->getAdherent($numero, $app);
 		if(!is_null($temp[0]) && !is_null($temp[1])){

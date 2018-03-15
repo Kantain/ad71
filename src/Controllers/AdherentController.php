@@ -50,6 +50,26 @@ class AdherentController{
         return $retour;
     }
 
+    public function listeAdherentClub(Application $app, $club){
+        $em = $app['em'];
+        $url = $app['url_generator']->generate('home');
+
+        $repository = $em->getRepository('pw\\Models\\AdherentAdministratif');
+        $sportifs = $em->getRepository('pw\\Models\\AdherentSportif');
+
+        $result = $repository->findBy(array(), array('no_adherent' => 'ASC'));
+        $retour = array();
+
+        foreach ($result as $key => $value) {
+            $requeteClub = $sportifs->findOneBy(array('no_adherent' => $value->getNoAdherent(),'dojo' => $club));
+            if (!is_null($requeteClub)) {
+                array_push($retour, $value);
+            }
+        }
+
+        return $retour;
+    }
+
     public function getAdherent($id, Application $app){
         $em = $app['em'];
         $url = $app['url_generator']->generate('home');

@@ -32,6 +32,10 @@ class User{
 		}
 	}
 
+	function getClubLettre(){
+		return $this->club;
+	}
+
 	function setLogin($_login){
 		$this->login = $_login;
 	}
